@@ -65,11 +65,17 @@ module.exports =
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 12);
+/******/ 	return __webpack_require__(__webpack_require__.s = 14);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ function(module, exports) {
+
+module.exports = require("path");
+
+/***/ },
+/* 1 */
 /***/ function(module, exports) {
 
 module.exports = {
@@ -121,12 +127,12 @@ module.exports = {
 };
 
 /***/ },
-/* 1 */
+/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-var mongoose = __webpack_require__(9);
+var mongoose = __webpack_require__(11);
 
-var conf = __webpack_require__(6);
+var conf = __webpack_require__(8);
 
 mongoose.connect(conf.url, conf.options).then(function () {
   console.log('connect mongdb success.....');
@@ -135,13 +141,13 @@ mongoose.connect(conf.url, conf.options).then(function () {
 });
 
 /***/ },
-/* 2 */
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_require_directory__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_require_directory___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_require_directory__);
-var Router = __webpack_require__(8);
+/* WEBPACK VAR INJECTION */(function(__dirname) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_requireDirectory_js__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_requireDirectory_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__common_requireDirectory_js__);
+var Router = __webpack_require__(10);
 
 var router = new Router();
 
@@ -155,32 +161,130 @@ router.get('/v1/api', function (ctx, next) {
 
 
 
-var routes = __WEBPACK_IMPORTED_MODULE_0_require_directory___default()(module, './api');
+console.log(process);
+var routes = __WEBPACK_IMPORTED_MODULE_0__common_requireDirectory_js___default()(__dirname, './api');
 
 module.exports = router;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)(module)))
-
-/***/ },
-/* 3 */
-/***/ function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(10);
-
+/* WEBPACK VAR INJECTION */}.call(exports, "server/routes"))
 
 /***/ },
 /* 4 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-module.exports = require("koa");
+module.exports = __webpack_require__(12);
+
 
 /***/ },
 /* 5 */
 /***/ function(module, exports) {
 
-module.exports = require("nuxt");
+module.exports = require("koa");
 
 /***/ },
 /* 6 */
+/***/ function(module, exports) {
+
+module.exports = require("nuxt");
+
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var fs = __webpack_require__(9),
+    join = __webpack_require__(0).join,
+    resolve = __webpack_require__(0).resolve,
+    dirname = __webpack_require__(0).dirname,
+    defaultOptions = {
+  extensions: ['js', 'json', 'coffee'],
+  recurse: true,
+  rename: function rename(name) {
+    return name;
+  },
+  visit: function visit(obj) {
+    return obj;
+  }
+};
+
+function checkFileInclusion(path, filename, options) {
+  return (
+    // verify file has valid extension
+    new RegExp('\\.(' + options.extensions.join('|') + ')$', 'i').test(filename) &&
+
+    // if options.include is a RegExp, evaluate it and make sure the path passes
+    !(options.include && options.include instanceof RegExp && !options.include.test(path)) &&
+
+    // if options.include is a function, evaluate it and make sure the path passes
+    !(options.include && typeof options.include === 'function' && !options.include(path, filename)) &&
+
+    // if options.exclude is a RegExp, evaluate it and make sure the path doesn't pass
+    !(options.exclude && options.exclude instanceof RegExp && options.exclude.test(path)) &&
+
+    // if options.exclude is a function, evaluate it and make sure the path doesn't pass
+    !(options.exclude && typeof options.exclude === 'function' && options.exclude(path, filename))
+  );
+}
+
+function requireDirectory(m, path, options) {
+  var retval = {};
+
+  // path is optional
+  if (path && !options && typeof path !== 'string') {
+    options = path;
+    path = null;
+  }
+
+  // default options
+  options = options || {};
+  for (var prop in defaultOptions) {
+    if (typeof options[prop] === 'undefined') {
+      options[prop] = defaultOptions[prop];
+    }
+  }
+
+  // if no path was passed in, assume the equivelant of __dirname from caller
+  // otherwise, resolve path relative to the equivalent of __dirname
+  // Debug：Compatibility handling in webpack build  [Added by dongmin 2018-03-17]
+  if (typeof m === 'string') {
+    path = resolve(m, path);
+  } else {
+    path = !path ? dirname(m.filename) : resolve(dirname(m.filename), path);
+  }
+
+  // get the path of each file in specified directory, append to current tree node, recurse
+  fs.readdirSync(path).forEach(function (filename) {
+    var joined = join(path, filename),
+        files,
+        key,
+        obj;
+
+    if (fs.statSync(joined).isDirectory() && options.recurse) {
+      // this node is a directory; recurse
+      files = requireDirectory(m, joined, options);
+      // exclude empty directories
+      if (Object.keys(files).length) {
+        retval[options.rename(filename, joined, filename)] = files;
+      }
+    } else {
+      if (joined !== m.filename && checkFileInclusion(joined, filename, options)) {
+        // hash node key shouldn't include file extension
+        key = filename.substring(0, filename.lastIndexOf('.'));
+        obj = m.require(joined);
+        retval[options.rename(key, joined, filename)] = options.visit(obj, joined, filename) || obj;
+      }
+    }
+  });
+
+  return retval;
+}
+
+module.exports = requireDirectory;
+module.exports.defaults = defaultOptions;
+
+/***/ },
+/* 8 */
 /***/ function(module, exports) {
 
 var conf = {
@@ -209,68 +313,43 @@ var initUri = function initUri(_ref) {
 exports.url = initUri(conf);
 
 /***/ },
-/* 7 */
-/***/ function(module, exports) {
-
-module.exports = function(module) {
-	if(!module.webpackPolyfill) {
-		module.deprecate = function() {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if(!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			configurable: false,
-			get: function() { return module.l; }
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			configurable: false,
-			get: function() { return module.i; }
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-}
-
-
-/***/ },
-/* 8 */
-/***/ function(module, exports) {
-
-module.exports = require("koa-router");
-
-/***/ },
 /* 9 */
 /***/ function(module, exports) {
 
-module.exports = require("mongoose");
+module.exports = require("fs");
 
 /***/ },
 /* 10 */
 /***/ function(module, exports) {
 
-module.exports = require("regenerator-runtime");
+module.exports = require("koa-router");
 
 /***/ },
 /* 11 */
 /***/ function(module, exports) {
 
-module.exports = require("require-directory");
+module.exports = require("mongoose");
 
 /***/ },
 /* 12 */
+/***/ function(module, exports) {
+
+module.exports = require("regenerator-runtime");
+
+/***/ },
+/* 13 */,
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_koa__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_koa__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_koa___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_koa__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_nuxt__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_nuxt__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_nuxt___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_nuxt__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__routes__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__routes__ = __webpack_require__(3);
 
 
 var start = function () {
@@ -291,7 +370,7 @@ var start = function () {
             app.use(__WEBPACK_IMPORTED_MODULE_3__routes__["default"].routes()).use(__WEBPACK_IMPORTED_MODULE_3__routes__["default"].allowedMethods());
 
             // Import and Set Nuxt.js options
-            config = __webpack_require__(0);
+            config = __webpack_require__(1);
 
             config.dev = !(app.env === 'production');
 
@@ -416,7 +495,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 
 
-__webpack_require__(1);
+__webpack_require__(2);
 
 
 

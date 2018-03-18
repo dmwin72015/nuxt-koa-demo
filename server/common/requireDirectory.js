@@ -54,14 +54,11 @@ function requireDirectory(m, path, options) {
   // if no path was passed in, assume the equivelant of __dirname from caller
   // otherwise, resolve path relative to the equivalent of __dirname
   // Debug：Compatibility handling in webpack build  [Added by dongmin 2018-03-17]
-
-  if (m && m.filename) {
-    path = !path ? dirname(m.filename) : resolve(dirname(m.filename), path);
+  if (typeof m === 'string') {
+    path = resolve(m, path)
   } else {
-    
+    path = !path ? dirname(m.filename) : resolve(dirname(m.filename), path);
   }
-
-
 
   // get the path of each file in specified directory, append to current tree node, recurse
   fs.readdirSync(path).forEach(function(filename) {

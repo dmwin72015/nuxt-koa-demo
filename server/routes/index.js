@@ -10,8 +10,9 @@ router.get('/v1/api', (ctx, next) => {
   })
 })
 
-import requireDirectory  from 'require-directory';
+import requireDirectory  from '../common/requireDirectory.js';
 
-const routes = requireDirectory(module, './api');
+console.log(process)
+const routes = requireDirectory(__dirname, './api');
 
 module.exports = router

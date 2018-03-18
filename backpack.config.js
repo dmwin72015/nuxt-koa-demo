@@ -4,10 +4,11 @@ module.exports = {
     config.node = Object.assign({}, config.node, {
       // __filename: false
       // node: false
-      
+      node: true
+
     })
 
-    // console.log(config);
+    console.log(config);
     // console.log('---------------')
     // console.log(options);
     // console.log(webpack);
