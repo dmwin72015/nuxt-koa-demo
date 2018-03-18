@@ -1,0 +1,164 @@
+@font-face {
+  font-family: 'hbinfo';
+  src:  url('~/assets/fonts/hbinfo.eot?sar479');
+  src:  url('~/assets/fonts/hbinfo.eot?sar479#iefix') format('embedded-opentype'),
+    url('~/assets/fonts/hbinfo.ttf?sar479') format('truetype'),
+    url('~/assets/fonts/hbinfo.woff?sar479') format('woff'),
+    url('~/assets/fonts/hbinfo.svg?sar479#hbinfo') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"],.dm {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'hbinfo' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-mood-happy-outline:before {
+  content: "\e900";
+}
+.icon-conversation:before {
+  content: "\e901";
+}
+.icon-dots-horizontal-triple:before {
+  content: "\e902";
+}
+.icon-exclamation-outline:before {
+  content: "\e903";
+}
+.icon-exclamation-solid:before {
+  content: "\e904";
+}
+.icon-indent-decrease:before {
+  content: "\e905";
+}
+.icon-indent-increase:before {
+  content: "\e906";
+}
+.icon-link:before {
+  content: "\e908";
+}
+.icon-menu:before {
+  content: "\e909";
+}
+.icon-mood-sad-solid:before {
+  content: "\e90a";
+}
+.icon-navigation-more:before {
+  content: "\e90b";
+}
+.icon-question:before {
+  content: "\e90c";
+}
+.icon-share-alt:before {
+  content: "\e90d";
+}
+.icon-stand-by:before {
+  content: "\e90e";
+}
+.icon-thumbs-down:before {
+  content: "\e90f";
+}
+.icon-thumbs-up:before {
+  content: "\e910";
+}
+.icon-user-solid-circle:before {
+  content: "\e911";
+}
+.icon-user-solid-square:before {
+  content: "\e912";
+}
+.icon-user:before {
+  content: "\e913";
+}
+.icon-view-hide:before {
+  content: "\e914";
+}
+.icon-view-list:before {
+  content: "\e915";
+}
+.icon-view-show:before {
+  content: "\e916";
+}
+.icon-view-tile:before {
+  content: "\e917";
+}
+.icon-arrow-thin-down:before {
+  content: "\e918";
+}
+.icon-arrow-thin-left:before {
+  content: "\e919";
+}
+.icon-arrow-thin-right:before {
+  content: "\e91a";
+}
+.icon-at-symbol:before {
+  content: "\e91b";
+}
+.icon-attachment:before {
+  content: "\e91c";
+}
+.icon-block:before {
+  content: "\e91d";
+}
+.icon-bug:before {
+  content: "\e91e";
+}
+.icon-checkmark-outline:before {
+  content: "\e91f";
+}
+.icon-checkmark:before {
+  content: "\e920";
+}
+.icon-cheveron-down:before {
+  content: "\e921";
+}
+.icon-cheveron-left:before {
+  content: "\e922";
+}
+.icon-cheveron-outline-down:before {
+  content: "\e923";
+}
+.icon-cheveron-outline-left:before {
+  content: "\e924";
+}
+.icon-cheveron-outline-right:before {
+  content: "\e925";
+}
+.icon-cheveron-outline-up:before {
+  content: "\e926";
+}
+.icon-cheveron-right:before {
+  content: "\e927";
+}
+.icon-cheveron-up:before {
+  content: "\e928";
+}
+.icon-close-outline:before {
+  content: "\e929";
+}
+.icon-close:before {
+  content: "\e92a";
+}
+.icon-code:before {
+  content: "\e92b";
+}
+.icon-cog:before {
+  content: "\e92c";
+}
+.icon-compose:before {
+  content: "\e92d";
+}
+.icon-system-report:before {
+  content: "\e907";
+}
