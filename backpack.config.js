@@ -1,11 +1,7 @@
 module.exports = {
   webpack: (config, options, webpack) => {
 
-    console.log("webpack 配置文件---------------------------")
-    console.log(config);
-    console.log("---------------------------")
-    console.log(options)
-    console.log("---------------------------")
+
 
     // config.module.rules.push({
     //   test:/\.js$/,
@@ -18,14 +14,13 @@ module.exports = {
       __filename: false,
       __dirname: false,
       node: true
-
     })
 
-    // console.log('---------------')
-    // console.log(options);
-    // console.log(webpack);
-
-
+    console.log("webpack 配置文件---------------------------")
+    console.log(config);
+    console.log("---------------------------")
+    console.log(options)
+    console.log("---------------------------")
 
     return config
   }

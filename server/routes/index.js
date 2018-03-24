@@ -3,14 +3,13 @@ const glob = require('glob');
 
 let router = new Router();
 
-console.log(process.cwd())
-console.log(__dirname);
+// console.log(process.cwd())
+// console.log(__dirname);
+// glob('../**/*.js', {}, (err, files) => {
 
-glob('../**/*.js', {}, (err, files) => {
+//   console.info(files);
 
-  console.info(files);
-
-})
+// })
 
 router.get('/v1/api', (ctx, next) => {
   ctx.body = JSON.stringify({
@@ -24,5 +23,6 @@ router.get('/v1/api', (ctx, next) => {
 // import requireDirectory  from '../common/requireDirectory.js';
 // const routes = req(__dirname, './api');
 
+console.log(module);
 
 module.exports = router
