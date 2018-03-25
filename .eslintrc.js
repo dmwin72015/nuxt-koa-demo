@@ -19,9 +19,10 @@ module.exports = {
         named: 'never'
       }
     ],
-    'semi':0,
-    'no-multiple-empty-lines':0,
-    'eol-last':0
+    'semi': 0,
+    'no-multiple-empty-lines': 0,
+    'eol-last': 0,
+    'quotes': 0
   },
   globals: {}
 }

@@ -2,7 +2,6 @@ import Koa from 'koa'
 import { Nuxt, Builder } from 'nuxt'
 import route from './routes/';
 
-
 async function start() {
   const app = new Koa()
   const host = process.env.HOST || '127.0.0.1'
@@ -27,19 +26,19 @@ async function start() {
     await builder.build()
   }
 
-  app.use(async(ctx, next) => {
+  app.use(async (ctx, next) => {
     const start = Date.now();
     await next();
     const ms = Date.now() - start;
     ctx.set('X-Response-Time', `${ms}ms`);
   });
 
-  app.use(async(ctx, next) => {
+  app.use(async (ctx, next) => {
     ctx.cookies.set('tets', 'Hello World', { signed: true })
     await next();
   });
 
-  app.use(async(ctx, next) => {
+  app.use(async (ctx, next) => {
     await next()
     ctx.status = 200 // koa defaults to 404 when it sees that status is unset
     return new Promise((resolve, reject) => {

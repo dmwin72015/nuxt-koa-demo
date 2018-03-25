@@ -4,12 +4,6 @@ module.exports =
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
-/******/ 	// object to store loaded chunks
-/******/ 	// "0" means "already loaded"
-/******/ 	var installedChunks = {
-/******/ 		1: 0
-/******/ 	};
-/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/
@@ -34,21 +28,6 @@ module.exports =
 /******/ 		return module.exports;
 /******/ 	}
 /******/
-/******/ 	// This file contains only the entry chunk.
-/******/ 	// The chunk loading function for additional chunks
-/******/ 	__webpack_require__.e = function requireEnsure(chunkId) {
-/******/ 		// "0" is the signal for "already loaded"
-/******/ 		if(installedChunks[chunkId] !== 0) {
-/******/ 			var chunk = require("./" + chunkId + ".js");
-/******/ 			var moreModules = chunk.modules, chunkIds = chunk.ids;
-/******/ 			for(var moduleId in moreModules) {
-/******/ 				modules[moduleId] = moreModules[moduleId];
-/******/ 			}
-/******/ 			for(var i = 0; i < chunkIds.length; i++)
-/******/ 				installedChunks[chunkIds[i]] = 0;
-/******/ 		}
-/******/ 		return Promise.resolve();
-/******/ 	};
 /******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
@@ -85,62 +64,12 @@ module.exports =
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "/";
 /******/
-/******/ 	// uncatched error handler for webpack runtime
-/******/ 	__webpack_require__.oe = function(err) {
-/******/ 		process.nextTick(function() {
-/******/ 			throw err; // catch this error by using System.import().catch()
-/******/ 		});
-/******/ 	};
-/******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = 10);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__api__);
-var Router = __webpack_require__(7);
-var glob = __webpack_require__(6);
-var path = __webpack_require__(8);
-
-
-
-// console.log(process.cwd())
-// console.log(__dirname)
-var routeDir = path.resolve(__dirname, '../server/routes');
-
-var files = glob.sync(path.join(routeDir, '/**/*.js'));
-files.forEach(function (ele) {
-  var routeName = ele.replace(routeDir, '');
-
-  if (routeName == '/index.js') {
-    return;
-  }
-  // console.log(`${ele}`);
-  var mod = {};
-  __webpack_require__.e/* require.ensure */(0).then((function (require) {
-    mod = __webpack_require__(11)("" + ele);
-  }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
-});
-
-var router = new Router();
-
-// console.log(router.url("root", "444"))
-// import req from 'require-directory'
-// import requireDirectory  from '../common/requireDirectory.js';
-// const routes = req(__dirname, './api');
-
-module.exports = router;
-
-// export default router
-
-/***/ },
-/* 1 */
 /***/ function(module, exports) {
 
 module.exports = {
@@ -203,6 +132,63 @@ module.exports = {
 };
 
 /***/ },
+/* 1 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__api__);
+
+
+var Router = __webpack_require__(7);
+var glob = __webpack_require__(6);
+var path = __webpack_require__(8);
+
+// console.log(process.cwd())
+// console.log(__dirname)
+var routeDir = path.resolve(__dirname, '../server/routes');
+
+/* 为了解决dynamic引用问题，暂时用require.context */
+var context = __webpack_require__(14);
+
+console.log(context.keys());
+context.keys().map(function (key) {
+  if (key === './index.js') {
+    return;
+  }
+  var mod = context(key);
+
+  console.log(mod);
+});
+
+// let files = glob.sync(path.join(routeDir, '/**/*.js'));
+
+// files.forEach((ele) => {
+//   let routeName = ele.replace(routeDir, '');
+//   if (routeName === '/index.js') {
+//     return;
+//   }
+//   let modPath = `.${routeName}`;
+//   let mod = context.resolve(modPath);
+//   let _route = context.resolve(modPath)
+
+//   console.log(_route.name);
+// });
+
+
+var router = new Router();
+
+// console.log(router.url("root", "444"))
+// import req from 'require-directory'
+// import requireDirectory  from '../common/requireDirectory.js';
+// const routes = req(__dirname, './api');
+
+// module.exports = router
+
+/* harmony default export */ exports["default"] = router;
+
+/***/ },
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -259,21 +245,21 @@ module.exports = require("regenerator-runtime");
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__huobi_nuxt_koa_demo_node_modules_babel_runtime_regenerator__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__huobi_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__huobi_nuxt_koa_demo_node_modules_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_koa__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_koa___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_koa__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_nuxt__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_nuxt___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_nuxt__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__routes___ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__routes___ = __webpack_require__(1);
 
 
 var start = function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__huobi_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.mark(function _callee4() {
+  var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.mark(function _callee4() {
     var _this = this;
 
     var app, host, port, config, nuxt, builder;
-    return __WEBPACK_IMPORTED_MODULE_0__huobi_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
+    return __WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {
           case 0:
@@ -287,7 +273,7 @@ var start = function () {
             app.use(__WEBPACK_IMPORTED_MODULE_3__routes___["default"].routes()).use(__WEBPACK_IMPORTED_MODULE_3__routes___["default"].allowedMethods());
 
             // Import and Set Nuxt.js options
-            config = __webpack_require__(1);
+            config = __webpack_require__(0);
 
             config.dev = !(app.env === 'production');
 
@@ -308,9 +294,9 @@ var start = function () {
           case 12:
 
             app.use(function () {
-              var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__huobi_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.mark(function _callee(ctx, next) {
+              var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.mark(function _callee(ctx, next) {
                 var start, ms;
-                return __WEBPACK_IMPORTED_MODULE_0__huobi_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+                return __WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
                   while (1) {
                     switch (_context.prev = _context.next) {
                       case 0:
@@ -337,8 +323,8 @@ var start = function () {
             }());
 
             app.use(function () {
-              var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__huobi_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.mark(function _callee2(ctx, next) {
-                return __WEBPACK_IMPORTED_MODULE_0__huobi_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+              var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.mark(function _callee2(ctx, next) {
+                return __WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
                   while (1) {
                     switch (_context2.prev = _context2.next) {
                       case 0:
@@ -360,8 +346,8 @@ var start = function () {
             }());
 
             app.use(function () {
-              var _ref4 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__huobi_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.mark(function _callee3(ctx, next) {
-                return __WEBPACK_IMPORTED_MODULE_0__huobi_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+              var _ref4 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.mark(function _callee3(ctx, next) {
+                return __WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
                   while (1) {
                     switch (_context3.prev = _context3.next) {
                       case 0:
@@ -415,6 +401,94 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 
 start();
+
+/***/ },
+/* 11 */
+/***/ function(module, exports) {
+
+module.exports = {
+  getArticle: function getArticle(ctx, next) {
+    ctx.body = {
+      code: 200,
+      data: {
+        url: ctx.url
+      },
+      message: 'success'
+    };
+  },
+  saveArticle: function saveArticle(ctx, next) {
+    ctx.body = {
+      code: 200,
+      data: {
+        url: ctx.url
+      },
+      message: 'success'
+    };
+  },
+  delArticle: function delArticle(ctx, next) {
+    ctx.body = {
+      code: 200,
+      data: {
+        url: ctx.url
+      },
+      message: 'success'
+    };
+  }
+};
+
+/***/ },
+/* 12 */
+/***/ function(module, exports) {
+
+module.exports = {
+  name: 12
+};
+
+/***/ },
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__controller_article__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__controller_article___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__controller_article__);
+
+
+module.exports = [{
+  url: "/:id",
+  methods: {
+    get: __WEBPACK_IMPORTED_MODULE_0__controller_article__["getArticle"],
+    post: __WEBPACK_IMPORTED_MODULE_0__controller_article__["saveArticle"],
+    delete: __WEBPACK_IMPORTED_MODULE_0__controller_article__["delArticle"]
+  }
+}];
+
+/***/ },
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+var map = {
+	"./api/index.js": 5,
+	"./api/test.js": 12,
+	"./api/v1/article.js": 13,
+	"./index.js": 1
+};
+function webpackContext(req) {
+	return __webpack_require__(webpackContextResolve(req));
+};
+function webpackContextResolve(req) {
+	var id = map[req];
+	if(!(id + 1)) // check for number
+		throw new Error("Cannot find module '" + req + "'.");
+	return id;
+};
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = 14;
+
 
 /***/ }
 /******/ ]);

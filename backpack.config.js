@@ -6,10 +6,10 @@ const merge = require('webpack-merge');
 let moduleLeng = 0;
 
 fs.readdirSync('node_modules')
-  .filter(function(x) {
+  .filter(function (x) {
     return ['.bin'].indexOf(x) === -1;
   })
-  .forEach(function(mod) {
+  .forEach(function (mod) {
     nodeModules[mod] = 'commonjs ' + mod;
     moduleLeng++;
   });
@@ -33,6 +33,10 @@ module.exports = {
       entry: {
         main: './server/index.js'
       },
+      /* 必须使用main */
+      // output: {
+      //   filename: '[name].server.js'
+      // },
       node: {
         node: false,
         __filename: false,
@@ -52,17 +56,14 @@ module.exports = {
       recordsPath: path.join(__dirname, 'build/records.json'),
 
       plugins: [
+        // new webpack.ContextReplacementPlugin(/server/, '.', true)
 
-        // new webpack.ContextReplacementPlugin(/server\/(.*)/, '', true , '$1.js')
-
-        new webpack.ContextReplacementPlugin(/server\/(controller|models|config|routes)/, (context) => {
-          Object.assign(context, {
-            regExp: /\.js$/,
-            request: './server/routes' // 相对路径解析
-          });
-
-          console.log(context);
-        })
+        // new webpack.ContextReplacementPlugin(/server\/(controller|models|config|routes)/, (context) => {
+        //   Object.assign(context, {
+        //     async: true,
+        //     regExp: /\.js$/
+        //   });
+        // })
       ]
     })
 

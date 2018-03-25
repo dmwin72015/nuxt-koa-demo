@@ -1,26 +1,41 @@
+import * as api from './api';
+
 const Router = require('koa-router');
 const glob = require('glob');
 const path = require('path');
-
-import * as api from './api';
 
 // console.log(process.cwd())
 // console.log(__dirname)
 const routeDir = path.resolve(__dirname, '../server/routes');
 
-let files = glob.sync(path.join(routeDir, '/**/*.js'));
-files.forEach((ele) => {
-  let routeName = ele.replace(routeDir, '');
+/* 为了解决dynamic引用问题，暂时用require.context */
+let context = require.context('@routes', true, /\.js$/);
 
-  if (routeName == '/index.js') {
+console.log(context.keys())
+context.keys().map(key => {
+  if (key === './index.js') {
     return;
   }
-  // console.log(`${ele}`);
-  let mod = {};
-  require.ensure([], (require) => {
-    mod = require(`${ele}`);
-  });
-});
+  let mod = context(key);
+
+  console.log(mod);
+})
+
+
+// let files = glob.sync(path.join(routeDir, '/**/*.js'));
+
+// files.forEach((ele) => {
+//   let routeName = ele.replace(routeDir, '');
+//   if (routeName === '/index.js') {
+//     return;
+//   }
+//   let modPath = `.${routeName}`;
+//   let mod = context.resolve(modPath);
+//   let _route = context.resolve(modPath)
+
+//   console.log(_route.name);
+// });
+
 
 let router = new Router();
 
@@ -29,6 +44,6 @@ let router = new Router();
 // import requireDirectory  from '../common/requireDirectory.js';
 // const routes = req(__dirname, './api');
 
-module.exports = router
+// module.exports = router
 
-// export default router
+export default router
