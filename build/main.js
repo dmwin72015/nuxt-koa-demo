@@ -4,6 +4,12 @@ module.exports =
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
+/******/ 	// object to store loaded chunks
+/******/ 	// "0" means "already loaded"
+/******/ 	var installedChunks = {
+/******/ 		1: 0
+/******/ 	};
+/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/
@@ -28,6 +34,21 @@ module.exports =
 /******/ 		return module.exports;
 /******/ 	}
 /******/
+/******/ 	// This file contains only the entry chunk.
+/******/ 	// The chunk loading function for additional chunks
+/******/ 	__webpack_require__.e = function requireEnsure(chunkId) {
+/******/ 		// "0" is the signal for "already loaded"
+/******/ 		if(installedChunks[chunkId] !== 0) {
+/******/ 			var chunk = require("./" + chunkId + ".js");
+/******/ 			var moreModules = chunk.modules, chunkIds = chunk.ids;
+/******/ 			for(var moduleId in moreModules) {
+/******/ 				modules[moduleId] = moreModules[moduleId];
+/******/ 			}
+/******/ 			for(var i = 0; i < chunkIds.length; i++)
+/******/ 				installedChunks[chunkIds[i]] = 0;
+/******/ 		}
+/******/ 		return Promise.resolve();
+/******/ 	};
 /******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
@@ -64,15 +85,59 @@ module.exports =
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "/";
 /******/
+/******/ 	// uncatched error handler for webpack runtime
+/******/ 	__webpack_require__.oe = function(err) {
+/******/ 		process.nextTick(function() {
+/******/ 			throw err; // catch this error by using System.import().catch()
+/******/ 		});
+/******/ 	};
+/******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 15);
+/******/ 	return __webpack_require__(__webpack_require__.s = 10);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-module.exports = require("path");
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__api__);
+var Router = __webpack_require__(7);
+var glob = __webpack_require__(6);
+var path = __webpack_require__(8);
+
+
+
+// console.log(process.cwd())
+// console.log(__dirname)
+var routeDir = path.resolve(__dirname, '../server/routes');
+
+var files = glob.sync(path.join(routeDir, '/**/*.js'));
+files.forEach(function (ele) {
+  var routeName = ele.replace(routeDir, '');
+
+  if (routeName == '/index.js') {
+    return;
+  }
+  // console.log(`${ele}`);
+  var mod = {};
+  __webpack_require__.e/* require.ensure */(0).then((function (require) {
+    mod = __webpack_require__(11)("" + ele);
+  }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
+});
+
+var router = new Router();
+
+// console.log(router.url("root", "444"))
+// import req from 'require-directory'
+// import requireDirectory  from '../common/requireDirectory.js';
+// const routes = req(__dirname, './api');
+
+module.exports = router;
+
+// export default router
 
 /***/ },
 /* 1 */
@@ -141,263 +206,66 @@ module.exports = {
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-var mongoose = __webpack_require__(12);
+module.exports = __webpack_require__(9);
 
-var conf = __webpack_require__(8);
-
-mongoose.connect(conf.url, conf.options).then(function () {
-  console.log('connect mongdb success.....');
-}).catch(function (err) {
-  console.error('connect to %s error', conf.url, err.message);
-});
 
 /***/ },
 /* 3 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_requireDirectory_js__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_requireDirectory_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__common_requireDirectory_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_require_directory__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_require_directory___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_require_directory__);
-var Router = __webpack_require__(11);
-
-var router = new Router();
-
-router.get('/v1/api', function (ctx, next) {
-  ctx.body = JSON.stringify({
-    code: 200,
-    data: null,
-    msg: "我是接口"
-  });
-});
-
-module.exports = exports = router;
-
-
-
-
-var routes = __WEBPACK_IMPORTED_MODULE_1_require_directory___default()(module, './api');
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9)(module)))
-
-/***/ },
-/* 4 */
-/***/ function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(13);
-
-
-/***/ },
-/* 5 */
 /***/ function(module, exports) {
 
 module.exports = require("koa");
 
 /***/ },
-/* 6 */
+/* 4 */
 /***/ function(module, exports) {
 
 module.exports = require("nuxt");
 
 /***/ },
+/* 5 */
+/***/ function(module, exports) {
+
+module.exports = {
+  name: "index"
+};
+
+/***/ },
+/* 6 */
+/***/ function(module, exports) {
+
+module.exports = require("glob");
+
+/***/ },
 /* 7 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var fs = __webpack_require__(10),
-    join = __webpack_require__(0).join,
-    resolve = __webpack_require__(0).resolve,
-    dirname = __webpack_require__(0).dirname,
-    defaultOptions = {
-  extensions: ['js', 'json', 'coffee'],
-  recurse: true,
-  rename: function rename(name) {
-    return name;
-  },
-  visit: function visit(obj) {
-    return obj;
-  }
-};
-
-function checkFileInclusion(path, filename, options) {
-  return (
-    // verify file has valid extension
-    new RegExp('\\.(' + options.extensions.join('|') + ')$', 'i').test(filename) &&
-
-    // if options.include is a RegExp, evaluate it and make sure the path passes
-    !(options.include && options.include instanceof RegExp && !options.include.test(path)) &&
-
-    // if options.include is a function, evaluate it and make sure the path passes
-    !(options.include && typeof options.include === 'function' && !options.include(path, filename)) &&
-
-    // if options.exclude is a RegExp, evaluate it and make sure the path doesn't pass
-    !(options.exclude && options.exclude instanceof RegExp && options.exclude.test(path)) &&
-
-    // if options.exclude is a function, evaluate it and make sure the path doesn't pass
-    !(options.exclude && typeof options.exclude === 'function' && options.exclude(path, filename))
-  );
-}
-
-function requireDirectory(m, path, options) {
-  var retval = {};
-
-  // path is optional
-  if (path && !options && typeof path !== 'string') {
-    options = path;
-    path = null;
-  }
-
-  // default options
-  options = options || {};
-  for (var prop in defaultOptions) {
-    if (typeof options[prop] === 'undefined') {
-      options[prop] = defaultOptions[prop];
-    }
-  }
-
-  // if no path was passed in, assume the equivelant of __dirname from caller
-  // otherwise, resolve path relative to the equivalent of __dirname
-  // Debug：Compatibility handling in webpack build  [Added by dongmin 2018-03-17]
-  if (typeof m === 'string') {
-    path = resolve(m, path);
-  } else {
-    path = !path ? dirname(m.filename) : resolve(dirname(m.filename), path);
-  }
-
-  // get the path of each file in specified directory, append to current tree node, recurse
-  fs.readdirSync(path).forEach(function (filename) {
-    var joined = join(path, filename),
-        files,
-        key,
-        obj;
-
-    if (fs.statSync(joined).isDirectory() && options.recurse) {
-      // this node is a directory; recurse
-      files = requireDirectory(m, joined, options);
-      // exclude empty directories
-      if (Object.keys(files).length) {
-        retval[options.rename(filename, joined, filename)] = files;
-      }
-    } else {
-      if (joined !== m.filename && checkFileInclusion(joined, filename, options)) {
-        // hash node key shouldn't include file extension
-        key = filename.substring(0, filename.lastIndexOf('.'));
-        obj = m.require(joined);
-        retval[options.rename(key, joined, filename)] = options.visit(obj, joined, filename) || obj;
-      }
-    }
-  });
-
-  return retval;
-}
-
-module.exports = requireDirectory;
-module.exports.defaults = defaultOptions;
-
-/***/ },
-/* 8 */
-/***/ function(module, exports) {
-
-var conf = {
-  host: 'localhost',
-  port: '27107',
-  db: 'chat',
-  auth: {
-    user: 'admin',
-    password: 'nv6q4xTmLeNi'
-  }
-};
-exports.options = {
-  autoIndex: true, // Don't build indexes
-  reconnectTries: Number.MAX_VALUE, // Never stop trying to reconnect
-  reconnectInterval: 500, // Reconnect every 500ms
-  poolSize: 10, // Maintain up to 10 socket connections
-  // If not connected, return errors immediately rather than waiting for reconnect
-  bufferMaxEntries: 0
-
-};
-
-var initUri = function initUri(_ref) {
-  var host = _ref.host,
-      port = _ref.port,
-      db = _ref.db;
-
-  return 'mongodb://' + host + ':' + port + '/' + db;
-};
-
-exports.url = initUri(conf);
-
-/***/ },
-/* 9 */
-/***/ function(module, exports) {
-
-module.exports = function(module) {
-	if(!module.webpackPolyfill) {
-		module.deprecate = function() {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if(!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			configurable: false,
-			get: function() { return module.l; }
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			configurable: false,
-			get: function() { return module.i; }
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-}
-
-
-/***/ },
-/* 10 */
-/***/ function(module, exports) {
-
-module.exports = require("fs");
-
-/***/ },
-/* 11 */
 /***/ function(module, exports) {
 
 module.exports = require("koa-router");
 
 /***/ },
-/* 12 */
+/* 8 */
 /***/ function(module, exports) {
 
-module.exports = require("mongoose");
+module.exports = require("path");
 
 /***/ },
-/* 13 */
+/* 9 */
 /***/ function(module, exports) {
 
 module.exports = require("regenerator-runtime");
 
 /***/ },
-/* 14 */
-/***/ function(module, exports) {
-
-module.exports = require("require-directory");
-
-/***/ },
-/* 15 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__huobi_nuxt_koa_demo_node_modules_babel_runtime_regenerator__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__huobi_nuxt_koa_demo_node_modules_babel_runtime_regenerator__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__huobi_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__huobi_nuxt_koa_demo_node_modules_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_koa__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_koa__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_koa___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_koa__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_nuxt__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_nuxt__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_nuxt___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_nuxt__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__routes__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__routes___ = __webpack_require__(0);
 
 
 var start = function () {
@@ -413,9 +281,10 @@ var start = function () {
             host = process.env.HOST || '127.0.0.1';
             port = process.env.PORT || 9800;
 
-            // custom route
 
-            app.use(__WEBPACK_IMPORTED_MODULE_3__routes__["default"].routes()).use(__WEBPACK_IMPORTED_MODULE_3__routes__["default"].allowedMethods());
+            app.keys = ['i love marourou 2019'];
+            // custom route
+            app.use(__WEBPACK_IMPORTED_MODULE_3__routes___["default"].routes()).use(__WEBPACK_IMPORTED_MODULE_3__routes___["default"].allowedMethods());
 
             // Import and Set Nuxt.js options
             config = __webpack_require__(1);
@@ -428,15 +297,15 @@ var start = function () {
             // Build in development
 
             if (!config.dev) {
-              _context4.next = 11;
+              _context4.next = 12;
               break;
             }
 
             builder = new __WEBPACK_IMPORTED_MODULE_2_nuxt__["Builder"](nuxt);
-            _context4.next = 11;
+            _context4.next = 12;
             return builder.build();
 
-          case 11:
+          case 12:
 
             app.use(function () {
               var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__huobi_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.mark(function _callee(ctx, next) {
@@ -473,7 +342,7 @@ var start = function () {
                   while (1) {
                     switch (_context2.prev = _context2.next) {
                       case 0:
-                        ctx.cookies.set('tets', 'Hello World');
+                        ctx.cookies.set('tets', 'Hello World', { signed: true });
                         _context2.next = 3;
                         return next();
 
@@ -526,7 +395,7 @@ var start = function () {
             app.listen(port, host);
             console.log('Server listening on ' + host + ':' + port); // eslint-disable-line no-console
 
-          case 16:
+          case 17:
           case 'end':
             return _context4.stop();
         }
@@ -542,8 +411,6 @@ var start = function () {
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 
-
-__webpack_require__(2);
 
 
 

@@ -20,7 +20,7 @@
   </section>
 </template>
 <style lang="scss">
-$form-group-margin-bottom:1em;
+$form-group-margin-bottom: 1em;
 
 #user-from {
   width: 600px;
@@ -30,15 +30,15 @@ $form-group-margin-bottom:1em;
 .form-control {
   display: block;
   width: 100%;
-  padding: .375rem .75rem;
+  padding: 0.375rem 0.75rem;
   font-size: 1rem;
   line-height: 1.5;
   color: #495057;
   background-color: #fff;
   background-clip: padding-box;
   border: 1px solid #ced4da;
-  border-radius: .25rem;
-  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .form-group {
@@ -55,17 +55,14 @@ $form-group-margin-bottom:1em;
   vertical-align: middle;
   user-select: none;
   border: 1px solid transparent;
-  padding: .375rem .75rem;
+  padding: 0.375rem 0.75rem;
   font-size: 1rem;
   line-height: 1.5;
-  border-radius: .25rem;
-  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
-
 </style>
 <script>
-export default {
-
-}
-
+export default {};
 </script>

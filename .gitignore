@@ -12,3 +12,6 @@ dist
 
 # build file
 build
+
+# editor file
+.editorconfig
