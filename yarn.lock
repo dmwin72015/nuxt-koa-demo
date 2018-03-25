@@ -872,7 +872,7 @@ babel-preset-backpack@^0.0.9:
     babel-preset-env "^1.1.4"
     babel-runtime "^6.22.0"
 
-babel-preset-env@^1.1.4, babel-preset-env@^1.6.0:
+babel-preset-env@^1.1.4, babel-preset-env@^1.6.0, babel-preset-env@^1.6.1:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/babel-preset-env/-/babel-preset-env-1.6.1.tgz#a18b564cc9b9afdf4aae57ae3c1b0d99188e6f48"
   dependencies:
@@ -4405,7 +4405,7 @@ node-sass@^4.7.2:
     stdout-stream "^1.4.0"
     "true-case-path" "^1.0.2"
 
-nodemon@^1.11.0:
+nodemon@^1.11.0, nodemon@^1.17.2:
   version "1.17.2"
   resolved "https://registry.yarnpkg.com/nodemon/-/nodemon-1.17.2.tgz#17c0062629610e03dd01241c576f1c4068da9fdd"
   dependencies:
@@ -7086,6 +7086,12 @@ webpack-log@^1.0.1:
     log-symbols "^2.1.0"
     loglevelnext "^1.0.1"
     uuid "^3.1.0"
+
+webpack-merge@^4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/webpack-merge/-/webpack-merge-4.1.2.tgz#5d372dddd3e1e5f8874f5bf5a8e929db09feb216"
+  dependencies:
+    lodash "^4.17.5"
 
 webpack-node-externals@^1.5.4, webpack-node-externals@^1.6.0:
   version "1.6.0"

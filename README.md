@@ -28,5 +28,5 @@ For detailed explanation on how things work, checkout the [Nuxt.js docs](https:/
 
 # TODO List
 
-> find out after use webpack , module.filename is undefined .
-
+>1.find out after use webpack , module.filename is undefined .
+>2.
