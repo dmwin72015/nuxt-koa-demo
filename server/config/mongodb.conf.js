@@ -1,7 +1,11 @@
 const conf = {
   host: 'localhost',
   port: '27107',
-  db: 'chat'
+  db: 'chat',
+  auth:{
+    user:'admin',
+    password:'nv6q4xTmLeNi'
+  }
 }
 exports.options = {
   autoIndex: true, // Don't build indexes

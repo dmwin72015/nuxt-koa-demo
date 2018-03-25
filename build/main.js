@@ -65,7 +65,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 14);
+/******/ 	return __webpack_require__(__webpack_require__.s = 15);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -113,6 +113,17 @@ module.exports = {
           loader: 'eslint-loader',
           exclude: /(node_modules)/
         });
+
+        // See "Other node core libraries" for additional options.
+        config.node = {
+          console: false,
+          global: true,
+          process: true,
+          __filename: "mock",
+          __dirname: "mock",
+          Buffer: false,
+          setImmediate: true
+        };
       }
     }
   },
@@ -130,7 +141,7 @@ module.exports = {
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-var mongoose = __webpack_require__(11);
+var mongoose = __webpack_require__(12);
 
 var conf = __webpack_require__(8);
 
@@ -145,9 +156,11 @@ mongoose.connect(conf.url, conf.options).then(function () {
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(__dirname) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_requireDirectory_js__ = __webpack_require__(7);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_requireDirectory_js__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_requireDirectory_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__common_requireDirectory_js__);
-var Router = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_require_directory__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_require_directory___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_require_directory__);
+var Router = __webpack_require__(11);
 
 var router = new Router();
 
@@ -159,19 +172,19 @@ router.get('/v1/api', function (ctx, next) {
   });
 });
 
+module.exports = exports = router;
 
 
-console.log(process);
-var routes = __WEBPACK_IMPORTED_MODULE_0__common_requireDirectory_js___default()(__dirname, './api');
 
-module.exports = router;
-/* WEBPACK VAR INJECTION */}.call(exports, "server/routes"))
+
+var routes = __WEBPACK_IMPORTED_MODULE_1_require_directory___default()(module, './api');
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9)(module)))
 
 /***/ },
 /* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(12);
+module.exports = __webpack_require__(13);
 
 
 /***/ },
@@ -193,7 +206,7 @@ module.exports = require("nuxt");
 "use strict";
 
 
-var fs = __webpack_require__(9),
+var fs = __webpack_require__(10),
     join = __webpack_require__(0).join,
     resolve = __webpack_require__(0).resolve,
     dirname = __webpack_require__(0).dirname,
@@ -290,7 +303,11 @@ module.exports.defaults = defaultOptions;
 var conf = {
   host: 'localhost',
   port: '27107',
-  db: 'chat'
+  db: 'chat',
+  auth: {
+    user: 'admin',
+    password: 'nv6q4xTmLeNi'
+  }
 };
 exports.options = {
   autoIndex: true, // Don't build indexes
@@ -316,35 +333,66 @@ exports.url = initUri(conf);
 /* 9 */
 /***/ function(module, exports) {
 
-module.exports = require("fs");
+module.exports = function(module) {
+	if(!module.webpackPolyfill) {
+		module.deprecate = function() {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if(!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			configurable: false,
+			get: function() { return module.l; }
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			configurable: false,
+			get: function() { return module.i; }
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+}
+
 
 /***/ },
 /* 10 */
 /***/ function(module, exports) {
 
-module.exports = require("koa-router");
+module.exports = require("fs");
 
 /***/ },
 /* 11 */
 /***/ function(module, exports) {
 
-module.exports = require("mongoose");
+module.exports = require("koa-router");
 
 /***/ },
 /* 12 */
 /***/ function(module, exports) {
 
+module.exports = require("mongoose");
+
+/***/ },
+/* 13 */
+/***/ function(module, exports) {
+
 module.exports = require("regenerator-runtime");
 
 /***/ },
-/* 13 */,
 /* 14 */
+/***/ function(module, exports) {
+
+module.exports = require("require-directory");
+
+/***/ },
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__huobi_nuxt_koa_demo_node_modules_babel_runtime_regenerator__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__huobi_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__huobi_nuxt_koa_demo_node_modules_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_koa__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_koa___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_koa__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_nuxt__ = __webpack_require__(6);
@@ -353,11 +401,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 var start = function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.mark(function _callee4() {
+  var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__huobi_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.mark(function _callee4() {
     var _this = this;
 
     var app, host, port, config, nuxt, builder;
-    return __WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
+    return __WEBPACK_IMPORTED_MODULE_0__huobi_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {
           case 0:
@@ -391,9 +439,9 @@ var start = function () {
           case 11:
 
             app.use(function () {
-              var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.mark(function _callee(ctx, next) {
+              var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__huobi_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.mark(function _callee(ctx, next) {
                 var start, ms;
-                return __WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+                return __WEBPACK_IMPORTED_MODULE_0__huobi_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
                   while (1) {
                     switch (_context.prev = _context.next) {
                       case 0:
@@ -420,8 +468,8 @@ var start = function () {
             }());
 
             app.use(function () {
-              var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.mark(function _callee2(ctx, next) {
-                return __WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+              var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__huobi_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.mark(function _callee2(ctx, next) {
+                return __WEBPACK_IMPORTED_MODULE_0__huobi_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
                   while (1) {
                     switch (_context2.prev = _context2.next) {
                       case 0:
@@ -443,8 +491,8 @@ var start = function () {
             }());
 
             app.use(function () {
-              var _ref4 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.mark(function _callee3(ctx, next) {
-                return __WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+              var _ref4 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__huobi_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.mark(function _callee3(ctx, next) {
+                return __WEBPACK_IMPORTED_MODULE_0__huobi_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
                   while (1) {
                     switch (_context3.prev = _context3.next) {
                       case 0:

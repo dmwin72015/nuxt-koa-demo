@@ -42,6 +42,17 @@ module.exports = {
           loader: 'eslint-loader',
           exclude: /(node_modules)/
         })
+
+        // See "Other node core libraries" for additional options.
+        config.node = {
+          console: false,
+          global: true,
+          process: true,
+          __filename: "mock",
+          __dirname: "mock",
+          Buffer: false,
+          setImmediate: true
+        }
       }
     }
   },
