@@ -3,47 +3,61 @@ import * as api from './api';
 const Router = require('koa-router');
 const glob = require('glob');
 const path = require('path');
+const _ = require('lodash');
 
 // console.log(process.cwd())
 // console.log(__dirname)
-const routeDir = path.resolve(__dirname, '../server/routes');
+// const routeDir = path.resolve(__dirname, '../server/routes');
 
+let router = new Router();
 /* 为了解决dynamic引用问题，暂时用require.context */
 let context = require.context('@routes', true, /\.js$/);
+let _def = 'all';
+let routeCache = [];
 
-console.log(context.keys())
-context.keys().map(key => {
+context.keys().map((key) => {
   if (key === './index.js') {
     return;
   }
   let mod = context(key);
 
-  console.log(mod);
+  let _key = key.replace('./', '/');
+  let _base = path.basename(_key, '.js');
+  let _dir = path.dirname(_key);
+  let _route = path.join(_dir, _base).replace('/_', '/:');
+
+  console.log(mod)
+
+  if (Array.isArray(mod)) {
+    mod.map(item => {
+      if (!item.url || !item.method) {
+        return;
+      }
+      let _method = Object.keys(item.method);
+      let _r = path.join(_route, item.url);
+      _method.length && _method.map(m => {
+        router[m](_r, item.method[m]);
+        routeCache.push({
+          path: _r,
+          type: m,
+          cb: item.method[m]
+        })
+      });
+    })
+  } else if (_.isFunction(mod)) {
+    router[_def](_route, mod);
+    routeCache.push({
+      path: _route,
+      type: _def,
+      cb: mod
+    })
+  } else if (_.isPlainObject(mod)) {
+
+  }
 })
 
 
-// let files = glob.sync(path.join(routeDir, '/**/*.js'));
-
-// files.forEach((ele) => {
-//   let routeName = ele.replace(routeDir, '');
-//   if (routeName === '/index.js') {
-//     return;
-//   }
-//   let modPath = `.${routeName}`;
-//   let mod = context.resolve(modPath);
-//   let _route = context.resolve(modPath)
-
-//   console.log(_route.name);
-// });
-
-
-let router = new Router();
-
-// console.log(router.url("root", "444"))
-// import req from 'require-directory'
-// import requireDirectory  from '../common/requireDirectory.js';
-// const routes = req(__dirname, './api');
-
-// module.exports = router
-
+console.info("==[路由]=============================")
+console.log(routeCache)
+console.info("==[路由]=============================")
 export default router

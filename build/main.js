@@ -144,48 +144,60 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var Router = __webpack_require__(7);
 var glob = __webpack_require__(6);
 var path = __webpack_require__(8);
+var _ = __webpack_require__(16);
 
 // console.log(process.cwd())
 // console.log(__dirname)
-var routeDir = path.resolve(__dirname, '../server/routes');
+// const routeDir = path.resolve(__dirname, '../server/routes');
 
+var router = new Router();
 /* 为了解决dynamic引用问题，暂时用require.context */
 var context = __webpack_require__(14);
+var _def = 'all';
+var routeCache = [];
 
-console.log(context.keys());
 context.keys().map(function (key) {
   if (key === './index.js') {
     return;
   }
   var mod = context(key);
 
+  var _key = key.replace('./', '/');
+  var _base = path.basename(_key, '.js');
+  var _dir = path.dirname(_key);
+  var _route = path.join(_dir, _base).replace('/_', '/:');
+
   console.log(mod);
+
+  if (Array.isArray(mod)) {
+    mod.map(function (item) {
+      if (!item.url || !item.method) {
+        return;
+      }
+      var _method = Object.keys(item.method);
+      var _r = path.join(_route, item.url);
+      _method.length && _method.map(function (m) {
+        router[m](_r, item.method[m]);
+        routeCache.push({
+          path: _r,
+          type: m,
+          cb: item.method[m]
+        });
+      });
+    });
+  } else if (_.isFunction(mod)) {
+    router[_def](_route, mod);
+    routeCache.push({
+      path: _route,
+      type: _def,
+      cb: mod
+    });
+  } else if (_.isPlainObject(mod)) {}
 });
 
-// let files = glob.sync(path.join(routeDir, '/**/*.js'));
-
-// files.forEach((ele) => {
-//   let routeName = ele.replace(routeDir, '');
-//   if (routeName === '/index.js') {
-//     return;
-//   }
-//   let modPath = `.${routeName}`;
-//   let mod = context.resolve(modPath);
-//   let _route = context.resolve(modPath)
-
-//   console.log(_route.name);
-// });
-
-
-var router = new Router();
-
-// console.log(router.url("root", "444"))
-// import req from 'require-directory'
-// import requireDirectory  from '../common/requireDirectory.js';
-// const routes = req(__dirname, './api');
-
-// module.exports = router
-
+console.info("==[路由]=============================");
+console.log(routeCache);
+console.info("==[路由]=============================");
 /* harmony default export */ exports["default"] = router;
 
 /***/ },
@@ -404,59 +416,119 @@ start();
 
 /***/ },
 /* 11 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator__);
+
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 module.exports = {
-  getArticle: function getArticle(ctx, next) {
-    ctx.body = {
-      code: 200,
-      data: {
-        url: ctx.url
-      },
-      message: 'success'
-    };
-  },
-  saveArticle: function saveArticle(ctx, next) {
-    ctx.body = {
-      code: 200,
-      data: {
-        url: ctx.url
-      },
-      message: 'success'
-    };
-  },
-  delArticle: function delArticle(ctx, next) {
-    ctx.body = {
-      code: 200,
-      data: {
-        url: ctx.url
-      },
-      message: 'success'
-    };
-  }
+  getArticle: function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.mark(function _callee(ctx, next) {
+      return __WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              console.log("aaaa");
+              ctx.body = {
+                code: 200,
+                data: {
+                  url: ctx.url,
+                  type: 'get'
+                },
+                message: 'success'
+              };
+
+            case 2:
+            case 'end':
+              return _context.stop();
+          }
+        }
+      }, _callee, this);
+    }));
+
+    function getArticle(_x, _x2) {
+      return _ref.apply(this, arguments);
+    }
+
+    return getArticle;
+  }(),
+  saveArticle: function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.mark(function _callee2(ctx, next) {
+      return __WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              ctx.body = {
+                code: 200,
+                data: {
+                  url: ctx.url,
+                  type: 'post'
+                },
+                message: 'success'
+              };
+
+            case 1:
+            case 'end':
+              return _context2.stop();
+          }
+        }
+      }, _callee2, this);
+    }));
+
+    function saveArticle(_x3, _x4) {
+      return _ref2.apply(this, arguments);
+    }
+
+    return saveArticle;
+  }(),
+  delArticle: function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.mark(function _callee3(ctx, next) {
+      return __WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              ctx.body = {
+                code: 200,
+                data: {
+                  url: ctx.url,
+                  type: 'delete'
+                },
+                message: 'success'
+              };
+
+            case 1:
+            case 'end':
+              return _context3.stop();
+          }
+        }
+      }, _callee3, this);
+    }));
+
+    function delArticle(_x5, _x6) {
+      return _ref3.apply(this, arguments);
+    }
+
+    return delArticle;
+  }()
 };
 
 /***/ },
-/* 12 */
-/***/ function(module, exports) {
-
-module.exports = {
-  name: 12
-};
-
-/***/ },
+/* 12 */,
 /* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__controller_article__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__controller_article___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__controller_article__);
 
 
 module.exports = [{
   url: "/:id",
-  methods: {
+  method: {
     get: __WEBPACK_IMPORTED_MODULE_0__controller_article__["getArticle"],
     post: __WEBPACK_IMPORTED_MODULE_0__controller_article__["saveArticle"],
     delete: __WEBPACK_IMPORTED_MODULE_0__controller_article__["delArticle"]
@@ -469,7 +541,7 @@ module.exports = [{
 
 var map = {
 	"./api/index.js": 5,
-	"./api/test.js": 12,
+	"./api/test/_mod.js": 17,
 	"./api/v1/article.js": 13,
 	"./index.js": 1
 };
@@ -489,6 +561,52 @@ webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
 webpackContext.id = 14;
 
+
+/***/ },
+/* 15 */,
+/* 16 */
+/***/ function(module, exports) {
+
+module.exports = require("lodash");
+
+/***/ },
+/* 17 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator__);
+
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+module.exports = function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.mark(function _callee(ctx, next) {
+    return __WEBPACK_IMPORTED_MODULE_0__xin_nuxt_koa_demo_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            // console.log(ctx.params);
+            // console.dir(ctx.request);
+            ctx.body = ctx.request;
+            // await next();
+            console.log("nnbbbb");
+
+          case 2:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, this);
+  }));
+
+  function a(_x, _x2) {
+    return _ref.apply(this, arguments);
+  }
+
+  return a;
+}();
 
 /***/ }
 /******/ ]);
