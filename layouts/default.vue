@@ -25,7 +25,7 @@ export default {
     mobileTopnav,
     pageSide
   }
-}
+};
 </script>
 <style lang="scss" scoped>
 #container {
