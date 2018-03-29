@@ -6,7 +6,7 @@
     <nuxt-link class="button" to="/api">
       测试接口
     </nuxt-link>
-    <nuxt-link class="button" to="/add_article">
+    <nuxt-link class="button" to="/adduser">
       添加用户
     </nuxt-link>
   </section>

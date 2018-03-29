@@ -11,13 +11,12 @@ module.exports = {
     }
   },
   async saveArticle(ctx, next) {
+    console.log(ctx.request.body)
     ctx.body = {
       code: 200,
-      data: {
-        url: ctx.url,
-        type: 'post'
-      },
-      message: 'success'
+      data: ctx.request.body,
+      message: 'success',
+      ip: ctx.ip
     }
   },
 

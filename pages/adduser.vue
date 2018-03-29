@@ -2,7 +2,7 @@
   <section id="user-from">
     <div class="form-group">
       <label for="">用户名</label>
-      <input type="text" class="form-control" placeholder="用户名">
+      <input type="text" class="form-control" placeholder="用户名" v-model="name">
     </div>
     <div class="form-group">
       <label for="">住址</label>
@@ -16,7 +16,7 @@
       <label for="">职业</label>
       <input type="text" class="form-control" placeholder="职业">
     </div>
-    <button type="submit" class="btn btn-primary">保存</button>
+    <button type="submit" class="btn btn-primary" @click="saveUser">保存</button>
   </section>
 </template>
 <style lang="scss">
@@ -64,5 +64,22 @@ $form-group-margin-bottom: 1em;
 }
 </style>
 <script>
-export default {};
+export default {
+  computed: {
+    name: {
+      get() {
+        return this.$store.state.user.name;
+      },
+      set(value) {
+        this.$store.commit("user/setName", value);
+      }
+    }
+  },
+  methods: {
+    saveUser(ev) {
+      ev.preventDefault();
+      this.$store.dispatch("user/SAVE_USER");
+    }
+  }
+};
 </script>
