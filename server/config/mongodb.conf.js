@@ -11,15 +11,15 @@ exports.options = {
   // If not connected, return errors immediately rather than waiting for reconnect
   bufferMaxEntries: 0,
   auth: {
-    user: 'test2',
+    user: 'test',
     password: 'test1234'
   }
 };
 
 const initUri = function ({
-  host,
-  port,
-  db
+  host = 'localhost',
+  port = '27017',
+  db = 'test'
 }) {
   // mongodb://localhost:port/dbname
   return 'mongodb://' + host + ':' + port + '/' + db;

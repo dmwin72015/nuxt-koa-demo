@@ -35,9 +35,10 @@ module.exports = {
    * plugins
    * https://segmentfault.com/q/1010000007871843/a-1020000009691488
    */
-  plugins: {
+  plugins: [
+    '~plugins/element-ui'
+  ],
 
-  },
   /*
    ** Customize the progress-bar color
    */

@@ -4,7 +4,9 @@ services:
     # restart: always
     image: mongo
     container_name: mongo-Dev
-    # command:  [-f /etc/mongo.conf]
+    command:
+      - "--config=/etc/mongod.conf"
+      # - "--auth"
     ports:
       - "37017:27017"
     environment:
@@ -14,4 +16,4 @@ services:
       # - /data/db 
       - /xin/docker_compose/mongoData:/data/db/mongo
       - /xin/docker_compose/mongoLog:/data/logs/mongo
-      - /xin/docker_compose/mongo.conf:/etc/mongo.conf
+      - /xin/docker_compose/mongod.conf:/etc/mongod.conf
