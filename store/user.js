@@ -28,12 +28,10 @@ export const actions = {
   // 保存
   SAVE_USER({ commit, state }, user) {
     axios.post('/api/v1/user', {
-      data: {
-        name: state.name,
-        address: state.address,
-        age: state.age,
-        job: state.job
-      }
+      name: state.name,
+      address: state.address,
+      age: state.age,
+      job: state.job
     }).then(resp => {
       console.log(resp);
     }).catch(err => {

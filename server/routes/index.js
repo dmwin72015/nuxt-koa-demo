@@ -1,7 +1,4 @@
-import * as api from './api';
-
 const Router = require('koa-router');
-const glob = require('glob');
 const path = require('path');
 const _ = require('lodash');
 
@@ -25,8 +22,6 @@ context.keys().map((key) => {
   let _base = path.basename(_key, '.js');
   let _dir = path.dirname(_key);
   let _route = path.join(_dir, _base).replace('/_', '/:');
-
-  console.log(mod)
 
   if (Array.isArray(mod)) {
     mod.map(item => {
@@ -58,6 +53,6 @@ context.keys().map((key) => {
 
 
 console.info("==[路由]=============================")
-console.log(routeCache)
+// console.log(routeCache)
 console.info("==[路由]=============================")
 export default router

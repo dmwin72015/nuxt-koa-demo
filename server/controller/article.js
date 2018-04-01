@@ -1,20 +1,18 @@
+const article = require('../models/');
 module.exports = {
   async getArticle(ctx, next) {
-    console.log("aaaa")
+    let art = await article.find({})
     ctx.body = {
       code: 200,
-      data: {
-        url: ctx.url,
-        type: 'get'
-      },
+      data: art,
       message: 'success'
     }
   },
   async saveArticle(ctx, next) {
-    console.log(ctx.request.body)
+    let art = await article.find({})
     ctx.body = {
       code: 200,
-      data: ctx.request.body,
+      data: art,
       message: 'success',
       ip: ctx.ip
     }

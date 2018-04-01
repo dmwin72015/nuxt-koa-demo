@@ -1,0 +1,17 @@
+version: '3'
+services:
+  mongoDb:
+    # restart: always
+    image: mongo
+    container_name: mongo-Dev
+    # command:  [-f /etc/mongo.conf]
+    ports:
+      - "37017:27017"
+    environment:
+      - MONGO_DATA_DIR=/data/db/mongo
+      - MONGO_LOG_DIR=/data/logs/mongo
+    volumes:
+      # - /data/db 
+      - /xin/docker_compose/mongoData:/data/db/mongo
+      - /xin/docker_compose/mongoLog:/data/logs/mongo
+      - /xin/docker_compose/mongo.conf:/etc/mongo.conf
