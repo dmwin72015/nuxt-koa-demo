@@ -1,6 +1,6 @@
 const { Schema } = require('mongoose');
 
-const userTable = {
+const fields = {
   name: { type: String },
   loginname: { type: String },
   pass: { type: String },
@@ -37,11 +37,11 @@ const userTable = {
   retrieve_time: { type: Number },
   retrieve_key: { type: String },
 
-  accessToken: { type: String },
+  accessToken: { type: String }
 }
 
 
-const UserSchema = new Schema(userTable);
+const UserSchema = new Schema(fields);
 
 UserSchema.index({ loginname: 1 }, { unique: true });
 UserSchema.index({ email: 1 }, { unique: true });

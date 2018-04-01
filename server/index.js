@@ -1,12 +1,17 @@
 import Koa from 'koa'
 import { Nuxt, Builder } from 'nuxt'
 import route from './routes/';
+import { connectDB } from './models';
+import koaBody from 'koa-body';
 
 async function start() {
   const app = new Koa()
   const host = process.env.HOST || '127.0.0.1'
   const port = process.env.PORT || 9800
+  // 连接数据库-MongoDB
+  await connectDB();
 
+  app.use(koaBody());
   app.keys = ['i love marourou 2019'];
   // custom route
   app.use(route.routes())
