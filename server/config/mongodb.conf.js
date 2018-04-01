@@ -1,11 +1,7 @@
 const conf = {
-  host: '127.0.0.1',
-  port: '37107',
+  host: 'localhost',
+  port: '37017',
   db: 'blog'
-  // auth: {
-  //   user: 'test',
-  //   password: 'test1234'
-  // }
 }
 exports.options = {
   autoIndex: true, // Don't build indexes
@@ -15,12 +11,16 @@ exports.options = {
   // If not connected, return errors immediately rather than waiting for reconnect
   bufferMaxEntries: 0
   // auth: {
-  //   user: 'test',
-  //   password: 'test1234'
+  //   user: 'root',
+  //   password: 'root1234'
   // }
 };
 
-const initUri = function ({ host, port, db }) {
+const initUri = function ({
+  host,
+  port,
+  db
+}) {
   // mongodb://localhost:port/dbname
   return 'mongodb://' + host + ':' + port + '/' + db;
 }
