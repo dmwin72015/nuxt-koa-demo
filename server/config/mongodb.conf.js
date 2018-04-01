@@ -9,11 +9,11 @@ exports.options = {
   reconnectInterval: 500, // Reconnect every 500ms
   poolSize: 10, // Maintain up to 10 socket connections
   // If not connected, return errors immediately rather than waiting for reconnect
-  bufferMaxEntries: 0
-  // auth: {
-  //   user: 'root',
-  //   password: 'root1234'
-  // }
+  bufferMaxEntries: 0,
+  auth: {
+    user: 'test2',
+    password: 'test1234'
+  }
 };
 
 const initUri = function ({
