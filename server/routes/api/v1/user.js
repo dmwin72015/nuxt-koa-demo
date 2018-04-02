@@ -1,4 +1,8 @@
-import { getArticle, saveArticle, delArticle } from '@controller/article';
+import {
+  getArticle,
+  saveArticle,
+  delArticle
+} from '@controller/article';
 
 module.exports = [{
   url: "/:id",
@@ -9,7 +13,6 @@ module.exports = [{
 }, {
   url: '/',
   method: {
-    post: saveArticle,
+    post: saveArticle
   }
 }]
-

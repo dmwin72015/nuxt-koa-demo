@@ -1,35 +1,58 @@
 <template>
     <div>
       <h3>电影添加</h3> 
-      <el-form ref="form" :model="form" label-width="80px">
-        <el-form-item label="活动名称">
-          <el-input v-model="form.name"></el-input>
+      <el-form ref="'film'" label-width="100px">
+        <el-form-item label="中文名字">
+          <el-input v-model="name_cn"></el-input>
         </el-form-item>
-        <el-form-item label="活动区域">
-          <el-select v-model="form.region" placeholder="请选择活动区域">
-            <el-option label="区域一" value="shanghai"></el-option>
-            <el-option label="区域二" value="beijing"></el-option>
-          </el-select>
+        <el-form-item label="英文名字">
+          <el-input v-model="name_en"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button  @click="submit">保存</el-button>
+          <el-button>取消</el-button>
         </el-form-item>
       </el-form>
     </div>
 </template>
 <script>
+import { mapState } from "vuex";
 export default {
   layout: "default_2",
   data() {
     return {
       form: {
-        name: "",
-        region: "",
-        date1: "",
-        date2: "",
-        delivery: false,
-        type: [],
-        resource: "",
-        desc: ""
+        name_cn: "",
+        name_en: ""
       }
     };
+  },
+  mounted() {
+    console.log(this.film);
+  },
+  computed: {
+    name_cn: {
+      get() {
+        return this.$store.state.film.name_cn;
+      },
+      set(value) {
+        this.$store.commit("film/SET_NAME_CN", value);
+      }
+    },
+    name_en: {
+      get() {
+        return this.$store.state.film.name_en;
+      },
+      set(value) {
+        this.$store.commit("film/SET_NAME_EN", value);
+      }
+    },
+    ...mapState(["film"])
+  },
+  methods: {
+    submit() {
+      console.log(this.film);
+    }
   }
 };
 </script>
