@@ -17,7 +17,6 @@ exports.connectDB = async function () {
       console.error(err)
       process.exit(0);
     });
-  console.log(conf)
   await mongoose.connect(conf.url, conf.options);
   const BaseModel = require('./base_model');
   const Schemas = {
