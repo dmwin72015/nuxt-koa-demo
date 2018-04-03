@@ -5,7 +5,8 @@ export const state = () => ({
   name: '',
   address: '',
   age: '',
-  job: ''
+  job: '',
+  film: '重名'
 })
 
 export const mutations = {

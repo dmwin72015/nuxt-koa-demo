@@ -47,11 +47,15 @@ export default {
         this.$store.commit("film/SET_NAME_EN", value);
       }
     },
-    ...mapState(["film"])
+    ...mapState({
+      film: "film",
+      user_file: "user.film"
+    })
   },
   methods: {
     submit() {
-      console.log(this.film);
+      console.log(this.$store);
+      console.log(this.user_file);
     }
   }
 };
