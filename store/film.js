@@ -3,7 +3,7 @@ import axios from 'axios'
 
 export const state = () => ({
   film: {
-    name_cn: '测试',
+    name_cn: '',
     name_en: '',
     release_date: '',
     country: '',
@@ -37,7 +37,6 @@ export const mutations = {
 };
 
 export const actions = {
-
   // 保存
   SAVE_FILM({
     commit,
@@ -55,3 +54,8 @@ export const actions = {
     })
   }
 };
+
+
+export const getters = {
+  generalForm: state => state.film
+}

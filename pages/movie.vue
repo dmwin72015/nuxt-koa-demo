@@ -1,12 +1,12 @@
 <template>
     <div>
       <h3>电影添加</h3> 
-      <el-form ref="'film'" label-width="100px">
+      <el-form ref="'film'" label-width="100px" v-model="form">
         <el-form-item label="中文名字">
-          <el-input v-model="name_cn"></el-input>
+          <el-input v-model="form.name_cn"></el-input>
         </el-form-item>
         <el-form-item label="英文名字">
-          <el-input v-model="name_en"></el-input>
+          <el-input v-model="form.name_en"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button  @click="submit">保存</el-button>
@@ -16,19 +16,15 @@
     </div>
 </template>
 <script>
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 export default {
   layout: "default_2",
   data() {
     return {
-      form: {
-        name_cn: "",
-        name_en: ""
-      }
     };
   },
   mounted() {
-    console.log(this.film);
+    console.log(this.$store);
   },
   computed: {
     name_cn: {
@@ -48,8 +44,10 @@ export default {
       }
     },
     ...mapState({
-      film: "film",
       user_file: "user.film"
+    }),
+    ...mapGetters("film", {
+      form: "generalForm"
     })
   },
   methods: {
