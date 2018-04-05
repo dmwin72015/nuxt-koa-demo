@@ -36,7 +36,11 @@ module.exports = {
    * https://segmentfault.com/q/1010000007871843/a-1020000009691488
    */
   plugins: [
-    '~plugins/element-ui'
+    '~/plugins/element-ui',
+    {
+      src: '~/plugins/scrollEvent',
+      ssr: false
+    }
   ],
 
   /*
@@ -49,6 +53,10 @@ module.exports = {
    ** Build configuration
    */
   build: {
+    /**
+     * window document undefined fix
+     */
+    // vendor: ['scrollEvent'],
     /*
      ** Run ESLINT on save
      */

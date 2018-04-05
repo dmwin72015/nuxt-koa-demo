@@ -1,40 +1,11 @@
 // import axios from 'axios'
-import axios from 'axios'
+import axios from 'axios';
+import filmMod from './model/film';
+import { createMutations, createState } from '../tools/util'
 
-export const state = () => ({
-  film: {
-    name_cn: '',
-    name_en: '',
-    release_date: '',
-    country: '',
-    language: '',
-    imdb_score: '',
-    storyline: '',
-    director: '',
-    writers: '',
-    stars: '',
-    runtime: '',
-    resolution: '',
-    size: '',
-    size_unit: '',
-    types: [],
-    extension: '',
-    subtitle: '',
-    download_url: ''
-  }
-})
+export const state = () => (createState(filmMod));
 
-export const mutations = {
-  SET_NAME_CN(state, value) {
-    state.film.name_cn = value
-  },
-  SET_NAME_EN(state, value) {
-    state.film.name_en = value
-  },
-  SET_FILM(state, value) {
-    state.film = value
-  }
-};
+export const mutations = createMutations(filmMod)
 
 export const actions = {
   // 保存
