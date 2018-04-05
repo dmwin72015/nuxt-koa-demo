@@ -1,5 +1,6 @@
 <template>
-  <component v-bind:is="current"></component>
+  <component v-bind:is="current">
+  </component>
 </template>
 <script>
 import { mapState, mapGetters } from "vuex";
@@ -10,7 +11,6 @@ import movieList from "@/components/admin/movie_list.vue";
 import movieDetail from "@/components/admin/movie_detail.vue";
 
 export default {
-  layout: "default_2",
   data() {
     return {
       current: "",

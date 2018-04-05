@@ -17,7 +17,6 @@
 <script>
 import { listScroll } from "@/plugins/scrollEvent";
 export default {
-  layout: "default_2",
   data() {
     return {
       title: "电影管理",
