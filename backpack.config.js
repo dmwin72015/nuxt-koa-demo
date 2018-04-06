@@ -6,10 +6,10 @@ const merge = require('webpack-merge');
 let moduleLeng = 0;
 
 fs.readdirSync('node_modules')
-  .filter(function (x) {
+  .filter((x) => {
     return ['.bin'].indexOf(x) === -1;
   })
-  .forEach(function (mod) {
+  .forEach((mod) => {
     nodeModules[mod] = 'commonjs ' + mod;
     moduleLeng++;
   });
@@ -26,8 +26,10 @@ module.exports = {
     let alias = {};
 
     Object.keys(fnDirs).forEach((ele) => {
-      alias['@' + ele] = path.resolve(__dirname + '/server', fnDirs[ele]);
+      alias['@' + ele] = path.resolve(__dirname, 'server', fnDirs[ele]);
     });
+
+    alias['@'] = path.resolve(__dirname, 'server');
 
     config = merge(config, {
       entry: {

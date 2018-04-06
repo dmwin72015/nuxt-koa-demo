@@ -1,13 +1,25 @@
+import path from 'path'
 import Koa from 'koa'
-import { Nuxt, Builder } from 'nuxt'
+import {
+  Nuxt,
+  Builder
+} from 'nuxt'
 import route from './routes/';
-import { connectDB } from './models';
+import {
+  connectDB
+} from './models';
 import koaBody from 'koa-body';
+import koaStatic from 'koa-static';
 
 async function start() {
   const app = new Koa()
   const host = process.env.HOST || '127.0.0.1'
   const port = process.env.PORT || 9800
+
+  // 静态资源
+  const staticDir = path.join(__dirname, "../static");
+  console.log(staticDir);
+  app.use(koaStatic(staticDir));
   // 连接数据库-MongoDB
   await connectDB();
 
@@ -39,7 +51,9 @@ async function start() {
   });
 
   app.use(async (ctx, next) => {
-    ctx.cookies.set('tets', 'Hello World', { signed: true })
+    ctx.cookies.set('tets', 'Hello World', {
+      signed: true
+    })
     await next();
   });
 
@@ -57,6 +71,10 @@ async function start() {
   })
 
   app.listen(port, host)
+
+  app.on('error', () => {
+    console.error('【' + Date.now() + '】服务器出错了')
+  })
   console.log('Server listening on ' + host + ':' + port) // eslint-disable-line no-console
 }
 

@@ -47,7 +47,15 @@ context.keys().map((key) => {
       cb: mod
     })
   } else if (_.isPlainObject(mod)) {
-
+    const _methods = Object.keys(mod);
+    _methods.forEach(m => {
+      router[m](_route, mod[m]);
+      routeCache.push({
+        path: _route,
+        type: m,
+        cb: mod[m]
+      })
+    })
   }
 })
 

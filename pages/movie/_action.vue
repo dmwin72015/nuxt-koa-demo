@@ -1,6 +1,5 @@
 <template>
-  <component v-bind:is="current">
-  </component>
+  <component :is="currentView" :prop-data="list"></component>
 </template>
 <script>
 import { mapState, mapGetters } from "vuex";
@@ -12,12 +11,7 @@ import movieDetail from "@/components/admin/movie_detail.vue";
 
 export default {
   data() {
-    return {
-      current: "",
-      form: filmMod,
-      sizeUnit: sizeUnit,
-      todo: ""
-    };
+    return {};
   },
   components: {
     add: movieAdd,
@@ -25,11 +19,25 @@ export default {
     detail: movieDetail
   },
   validate({ params }) {
-    // Must be a number
-    console.log(params);
-    this.current = params.action;
-    console.log(this.current)
     return /^[\w\d]+$/.test(params.action);
+  },
+  fetch({ store, params }) {
+    store.dispatch("film/GET_FILMS");
+  },
+  asyncData({ params, env, error }) {
+    let data = {};
+    if (!params.action) {
+      data = {
+        currentView: "list",
+        list: []
+      };
+    } else {
+      data = {
+        currentView: params.action,
+        list: []
+      };
+    }
+    return data;
   },
   methods: {
     submit() {

@@ -4,7 +4,6 @@
 const mongoose = require('mongoose');
 const conf = require('../config/mongodb.conf.js');
 
-
 // ES6 Promise
 mongoose.Promise = global.Promise;
 
@@ -27,6 +26,6 @@ exports.connectDB = async function () {
 
   Object.keys(Schemas).forEach(ele => {
     BaseModel(Schemas[ele]);
-    module.exports[ele] = mongoose.model(ele, Schemas[ele]);
+    exports[ele] = mongoose.model(ele, Schemas[ele]);
   });
 }

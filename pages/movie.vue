@@ -4,14 +4,14 @@
       <el-breadcrumb separator="/" class="admin-top-nav">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
         <el-breadcrumb-item>
-          <a href="/">影片管理</a>
+          <a href="/movie">影片管理</a>
         </el-breadcrumb-item>
         <el-breadcrumb-item>添加</el-breadcrumb-item>
       </el-breadcrumb>
       <el-button type="primary">保存</el-button>
       <el-button>取消</el-button>
     </div>
-    <nuxt-child/>
+    <nuxt-child :key="$route.params.action" />
   </div>
 </template>
 <script>
@@ -19,7 +19,7 @@ import { listScroll } from "@/plugins/scrollEvent";
 export default {
   data() {
     return {
-      title: "电影管理",
+      title: "后台-电影管理",
       scrollFlag: false
     };
   },

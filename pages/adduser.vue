@@ -23,8 +23,8 @@
 $form-group-margin-bottom: 1em;
 
 #user-from {
-  width: 600px;
-  margin: 20px auto;
+  padding: 20px;
+  margin-top:40px;
 }
 
 .form-control {

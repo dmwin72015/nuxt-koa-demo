@@ -13,6 +13,7 @@ module.exports = [{
 }, {
   url: '/',
   method: {
-    post: saveFilm
+    post: saveFilm,
+    get: getFilm
   }
 }]

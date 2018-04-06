@@ -21,7 +21,7 @@
           </el-badge>
         </div>
         <div class="toggle-miniMenu" @click="toggleShow">
-          <i class="el-icon-back" :class="{'go' :isCollapse }"></i>
+          <i class="el-icon-back"></i>
         </div>
       </div>
       <el-menu default-active="1-4-1" class="el-menu-vertical-demo main-menu" :collapse="isCollapse">
@@ -61,18 +61,25 @@
   </div>
 </template>
 <script>
+import { mapState, mapMutations } from "vuex";
+
 export default {
   name: "default_template_movie",
   data() {
-    return {
-      showToggleMenuBtn: false,
-      isCollapse: false
-    };
+    return {};
+  },
+  computed: {
+    ...mapState({
+      isCollapse: state => state.menu.isCollapse
+    })
   },
   methods: {
     toggleShow() {
-      this.isCollapse = !this.isCollapse;
-    }
+      this.toggleCollapse(!this.isCollapse);
+    },
+    ...mapMutations({
+      toggleCollapse: "menu/SET_COLLAPSE"
+    })
   }
 };
 </script>
@@ -82,7 +89,7 @@ export default {
 #container {
   position: relative;
   height: 100%;
-
+  display: flex;
   &.mini-menu {
     .left-panel {
       width: $nav-min-width;
@@ -102,12 +109,16 @@ export default {
         margin-left: 0;
       }
     }
+    .toggle-miniMenu .el-icon-back {
+      transform: rotate(180deg);
+    }
   }
 }
 .main-content {
   @include trans();
   margin-left: $nav-max-width;
   padding-right: 20px;
+  flex: 1;
 }
 .left-panel {
   position: absolute;
@@ -205,9 +216,6 @@ export default {
     transition: all 0.2s;
     .el-icon-back {
       @include trans();
-    }
-    .go {
-      transform: rotate(180deg);
     }
   }
 

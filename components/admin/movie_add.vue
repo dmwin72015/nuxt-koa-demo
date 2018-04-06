@@ -21,12 +21,9 @@
       </el-col>
       <el-col :span="12">
         <el-form-item label="封面图">
-          <el-upload class="upload-demo" drag action="https://jsonplaceholder.typicode.com/posts/" multiple>
-            <i class="el-icon-upload"></i>
-            <div class="el-upload__text">将文件拖到此处，或
-              <em>点击上传</em>
-            </div>
-            <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+          <el-upload class="pic-uploader" action="/api/v1/uploadfile" :show-file-list="false" :on-success="uploadSuccess" :on-error="uploadError" :before-upload="beforeAvatarUpload" :multiple="false">
+            <img v-if="imageUrl" :src="imageUrl" class="avatar">
+            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
         </el-form-item>
       </el-col>
@@ -71,6 +68,9 @@
         </el-form-item>
       </el-col>
     </el-row>
+    <el-form-item label="剧情简介">
+      <el-input type="textarea" v-model="form.storyline"></el-input>
+    </el-form-item>
     <h3 class="film-panel-title">文件信息</h3>
     <el-row>
       <el-col :span="8">
@@ -102,13 +102,7 @@
     <el-form-item label="下载链接">
       <el-input v-model="form.download_url"></el-input>
     </el-form-item>
-    <el-form-item label="故事简介">
-      <el-input type="textarea" v-model="form.storyline"></el-input>
-    </el-form-item>
-    <!-- <el-form-item>
-      <el-button @click="submit">保存</el-button>
-      <el-button>取消</el-button>
-    </el-form-item> -->
+
   </el-form>
 </template>
 <script>
@@ -142,7 +136,8 @@ export default {
           value: "选项5",
           label: "北京烤鸭"
         }
-      ]
+      ],
+      imageUrl: ""
     };
   },
   mounted() {},
@@ -154,7 +149,30 @@ export default {
   methods: {
     submit() {
       console.log(this.form);
-    }
+    },
+    beforeAvatarUpload(file) {
+      const isImg = /image\/(jpeg|png|jpg)/gi.test(file.type);
+      const isLt2M = file.size / 1024 / 1024 < 2;
+      if (!isImg) {
+        this.$message.error(
+          "上传头像图片只能是图片（jpeg/png/jpg）格式中的一种!"
+        );
+        return isImg;
+      }
+      if (!isLt2M) {
+        this.$message.error("上传头像图片大小不能超过 2MB!");
+        return isLt2M;
+      }
+      return isImg && isLt2M;
+    },
+    uploadSuccess(resp, file, filelist) {
+      console.log("上传成功结果 >>>>>> line:157", resp);
+      this.imageUrl = resp.data.url;
+    },
+    uploadError(err, file, filelist) {
+      console.log("上传失败结果 >>>>>> line:159", err);
+    },
+    handleRemove() {}
   }
 };
 </script>
@@ -171,6 +189,30 @@ export default {
   .el-select,
   .el-date-editor {
     width: 100%;
+  }
+}
+.pic-uploader {
+  /deep/ .el-upload {
+    border: 1px dashed #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    position: relative;
+    width: 280px;
+    height: 140px;
+    overflow: hidden;
+    &:hover {
+      border-color: #409eff;
+    }
+  }
+  /deep/ .avatar-uploader-icon {
+    width: 280px;
+    height: 140px;
+    line-height: 140px;
+    text-align: center;
+    font-size: 32px;
+  }
+  /deep/ img {
+    max-height: 100%;
   }
 }
 </style>

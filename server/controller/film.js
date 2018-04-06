@@ -1,6 +1,6 @@
-const {
-  Film
-} = require('../models');
+import models from '../models';
+
+console.log("【mongoose-model】 >>>> film.js >>> line:3", models)
 
 module.exports = {
   async getFilm(ctx, next) {

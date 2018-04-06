@@ -61,7 +61,6 @@ const fields = {
   subtitle: String, // 字幕
   download_url: {
     type: String
-
   } // 下载链接
 }
 
