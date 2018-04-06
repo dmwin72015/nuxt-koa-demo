@@ -12,6 +12,7 @@ dist
 
 # build files
 build
+static/upload
 
 # editor file
 .editorconfig
