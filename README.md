@@ -28,5 +28,5 @@ For detailed explanation on how things work, checkout the [Nuxt.js docs](https:/
 
 # TODO List
 
->1.find out after use webpack , module.filename is undefined .
->2.
+>1.find out after use webpack , module.filename is undefined .（has Done，see：webpack document）
+>2.zlib.unzipSync  request请求时，在data Event中，使用zlib.unzipSync(data), 会报错Error: unexpected end of file

@@ -12,12 +12,6 @@
         <el-form-item label="发行时间">
           <el-date-picker v-model="form.release_date" type="date" placeholder="选择日期"></el-date-picker>
         </el-form-item>
-        <el-form-item label="语言">
-          <el-select v-model="form.language" filterable placeholder="请选择">
-            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-            </el-option>
-          </el-select>
-        </el-form-item>
       </el-col>
       <el-col :span="12">
         <el-form-item label="封面图">
@@ -30,7 +24,7 @@
     </el-row>
     <el-row>
       <el-col :span="12">
-        <el-form-item label="发行国家">
+        <el-form-item label="语言">
           <el-select v-model="form.language" filterable placeholder="请选择">
             <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
@@ -38,14 +32,25 @@
         </el-form-item>
       </el-col>
       <el-col :span="12">
-        <el-form-item label="IMDB评分">
-          <el-input v-model="form.imdb_score"></el-input>
+        <el-form-item label="发行国家">
+          <el-select v-model="form.language" filterable placeholder="请选择">
+            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
         </el-form-item>
       </el-col>
     </el-row>
     <el-row>
-      <el-col :span="12"></el-col>
-      <el-col :span="12"></el-col>
+      <el-col :span="12">
+        <el-form-item label="IMDB评分">
+          <el-input v-model="form.imdb_score"></el-input>
+        </el-form-item>
+      </el-col>
+      <el-col :span="12">
+        <el-form-item label="主演">
+          <el-input v-model="form.stars"></el-input>
+        </el-form-item>
+      </el-col>
     </el-row>
     <el-row>
       <el-col :span="12">
@@ -56,15 +61,6 @@
       <el-col :span="12">
         <el-form-item label="编剧">
           <el-input v-model="form.writers"></el-input>
-        </el-form-item>
-      </el-col>
-    </el-row>
-    <el-row>
-      <el-col :span="12">
-      </el-col>
-      <el-col :span="12">
-        <el-form-item label="主演">
-          <el-input v-model="form.stars"></el-input>
         </el-form-item>
       </el-col>
     </el-row>
@@ -81,7 +77,6 @@
           <el-input v-model="form.size"></el-input>
         </el-form-item>
       </el-col>
-
       <el-col :span="8">
         <el-form-item label="文件分辨率">
           <el-input v-model="form.resolution"></el-input>
@@ -102,7 +97,6 @@
     <el-form-item label="下载链接">
       <el-input v-model="form.download_url"></el-input>
     </el-form-item>
-
   </el-form>
 </template>
 <script>

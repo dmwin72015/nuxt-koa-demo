@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/Cellar/node/9.8.0/bin/node /Users/mjj/.yarn/bin/yarn.js add moment
+  /usr/local/Cellar/node/9.8.0/bin/node /Users/mjj/.yarn/bin/yarn.js add iltorb
 
 PATH: 
   /usr/local/opt/imagemagick@6/bin:/Users/mjj/.yarn/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
@@ -35,6 +35,7 @@ npm manifest:
       "babel-loader": "^7.1.4",
       "babel-polyfill": "^6.26.0",
       "babel-preset-env": "^1.6.1",
+      "brotli": "^1.3.2",
       "busboy": "^0.2.14",
       "cross-env": "^5.0.1",
       "crypto": "^1.0.1",
@@ -44,14 +45,18 @@ npm manifest:
       "koa": "^2.4.1",
       "koa-body": "^2.5.0",
       "koa-router": "^7.4.0",
+      "koa-static": "^4.0.2",
       "loader-utils": "^1.1.0",
       "lodash": "^4.17.5",
+      "moment": "^2.22.0",
       "mongoose": "^5.0.10",
       "node-sass": "^4.7.2",
       "nuxt": "latest",
       "require-directory": "^2.1.1",
       "sass-loader": "^6.0.7",
+      "shortid": "^2.2.8",
       "source-map-support": "^0.4.15",
+      "superagent": "^3.8.2",
       "vue-style-loader": "^4.0.2"
     },
     "devDependencies": {
@@ -203,7 +208,7 @@ Lockfile:
     dependencies:
       color-convert "^1.9.0"
   
-  any-promise@^1.1.0:
+  any-promise@^1.0.0, any-promise@^1.1.0:
     version "1.3.0"
     resolved "https://registry.yarnpkg.com/any-promise/-/any-promise-1.3.0.tgz#abc6afeedcea52e809cdc0376aed3ce39635d17f"
   
@@ -1130,7 +1135,7 @@ Lockfile:
     version "1.0.0"
     resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
   
-  base64-js@^1.0.2:
+  base64-js@^1.0.2, base64-js@^1.1.2:
     version "1.2.3"
     resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.2.3.tgz#fb13668233d9614cf5fb4bce95a9ba4096cdf801"
   
@@ -1250,6 +1255,12 @@ Lockfile:
   brorand@^1.0.1:
     version "1.1.0"
     resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
+  
+  brotli@^1.3.2:
+    version "1.3.2"
+    resolved "https://registry.yarnpkg.com/brotli/-/brotli-1.3.2.tgz#525a9cad4fcba96475d7d388f6aecb13eed52f46"
+    dependencies:
+      base64-js "^1.1.2"
   
   browserify-aes@^1.0.0, browserify-aes@^1.0.4:
     version "1.1.1"
@@ -1689,7 +1700,7 @@ Lockfile:
     version "1.1.2"
     resolved "https://registry.yarnpkg.com/colors/-/colors-1.1.2.tgz#168a4701756b6a7f51a12ce0c97bfa28c084ed63"
   
-  combined-stream@^1.0.5, combined-stream@~1.0.5:
+  combined-stream@1.0.6, combined-stream@^1.0.5, combined-stream@~1.0.5:
     version "1.0.6"
     resolved "https://registry.yarnpkg.com/combined-stream/-/combined-stream-1.0.6.tgz#723e7df6e801ac5613113a7e445a9b69cb632818"
     dependencies:
@@ -1707,7 +1718,7 @@ Lockfile:
     version "1.0.1"
     resolved "https://registry.yarnpkg.com/commondir/-/commondir-1.0.1.tgz#ddd800da0c66127393cca5950ea968a3aaf1253b"
   
-  component-emitter@^1.2.1:
+  component-emitter@^1.2.0, component-emitter@^1.2.1:
     version "1.2.1"
     resolved "https://registry.yarnpkg.com/component-emitter/-/component-emitter-1.2.1.tgz#137918d6d78283f7df7a6b7c5a63e140e69425e6"
   
@@ -1804,6 +1815,10 @@ Lockfile:
   cookie@0.3.1, cookie@^0.3.1:
     version "0.3.1"
     resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.3.1.tgz#e7e0a1f9ef43b4c8ba925c5c5a96e806d16873bb"
+  
+  cookiejar@^2.1.0:
+    version "2.1.1"
+    resolved "https://registry.yarnpkg.com/cookiejar/-/cookiejar-2.1.1.tgz#41ad57b1b555951ec171412a81942b1e8200d34a"
   
   cookies@~0.7.0:
     version "0.7.1"
@@ -2079,7 +2094,7 @@ Lockfile:
     version "1.0.2"
     resolved "https://registry.yarnpkg.com/de-indent/-/de-indent-1.0.2.tgz#b2038e846dc33baa5796128d0804b455b8c1e21d"
   
-  debug@*, debug@2.6.9, debug@^2.1.1, debug@^2.2.0, debug@^2.3.3, debug@^2.6.8, debug@^2.6.9:
+  debug@*, debug@2.6.9, debug@^2.1.1, debug@^2.2.0, debug@^2.3.3, debug@^2.6.3, debug@^2.6.8, debug@^2.6.9:
     version "2.6.9"
     resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
     dependencies:
@@ -2727,7 +2742,7 @@ Lockfile:
       assign-symbols "^1.0.0"
       is-extendable "^1.0.1"
   
-  extend@~3.0.0:
+  extend@^3.0.0, extend@~3.0.0:
     version "3.0.1"
     resolved "https://registry.yarnpkg.com/extend/-/extend-3.0.1.tgz#a755ea7bc1adfcc5a31ce7e762dbaadc5e636444"
   
@@ -2921,6 +2936,14 @@ Lockfile:
   forever-agent@~0.6.1:
     version "0.6.1"
     resolved "https://registry.yarnpkg.com/forever-agent/-/forever-agent-0.6.1.tgz#fbc71f0c41adeb37f96c577ad1ed42d8fdacca91"
+  
+  form-data@^2.3.1:
+    version "2.3.2"
+    resolved "https://registry.yarnpkg.com/form-data/-/form-data-2.3.2.tgz#4970498be604c20c005d4f5c23aecd21d6b49099"
+    dependencies:
+      asynckit "^0.4.0"
+      combined-stream "1.0.6"
+      mime-types "^2.1.12"
   
   form-data@~2.1.1:
     version "2.1.4"
@@ -3361,6 +3384,15 @@ Lockfile:
       inherits "2.0.3"
       setprototypeof "1.0.3"
       statuses ">= 1.3.1 < 2"
+  
+  http-errors@^1.6.1:
+    version "1.6.3"
+    resolved "https://registry.yarnpkg.com/http-errors/-/http-errors-1.6.3.tgz#8b55680bb4be283a0b5bf4ea2e38580be1d9320d"
+    dependencies:
+      depd "~1.1.2"
+      inherits "2.0.3"
+      setprototypeof "1.1.0"
+      statuses ">= 1.4.0 < 2"
   
   http-signature@~1.1.0:
     version "1.1.1"
@@ -3918,6 +3950,22 @@ Lockfile:
       path-to-regexp "^1.1.1"
       urijs "^1.19.0"
   
+  koa-send@^4.1.0:
+    version "4.1.3"
+    resolved "https://registry.yarnpkg.com/koa-send/-/koa-send-4.1.3.tgz#0822207bbf5253a414c8f1765ebc29fa41353cb6"
+    dependencies:
+      debug "^2.6.3"
+      http-errors "^1.6.1"
+      mz "^2.6.0"
+      resolve-path "^1.4.0"
+  
+  koa-static@^4.0.2:
+    version "4.0.2"
+    resolved "https://registry.yarnpkg.com/koa-static/-/koa-static-4.0.2.tgz#6cda92d88d771dcaad9f0d825cd94a631c861a1a"
+    dependencies:
+      debug "^2.6.8"
+      koa-send "^4.1.0"
+  
   koa@^2.4.1:
     version "2.5.0"
     resolved "https://registry.yarnpkg.com/koa/-/koa-2.5.0.tgz#b0fbe1e195e43b27588a04fd0be0ddaeca2c154c"
@@ -4218,7 +4266,7 @@ Lockfile:
     version "1.0.1"
     resolved "https://registry.yarnpkg.com/merge-descriptors/-/merge-descriptors-1.0.1.tgz#b00aaa556dd8b44568150ec9d1b953f3f90cbb61"
   
-  methods@^1.0.1, methods@~1.1.2:
+  methods@^1.0.1, methods@^1.1.1, methods@~1.1.2:
     version "1.1.2"
     resolved "https://registry.yarnpkg.com/methods/-/methods-1.1.2.tgz#5529a4d67654134edcc5266656835b0f851afcee"
   
@@ -4330,6 +4378,10 @@ Lockfile:
     dependencies:
       minimist "0.0.8"
   
+  moment@^2.22.0:
+    version "2.22.0"
+    resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.0.tgz#7921ade01017dd45186e7fee5f424f0b8663a730"
+  
   mongodb-core@3.0.4:
     version "3.0.4"
     resolved "https://registry.yarnpkg.com/mongodb-core/-/mongodb-core-3.0.4.tgz#a3fdf466e697a2f1df87e458e5e2df1c26cc654b"
@@ -4402,6 +4454,14 @@ Lockfile:
   mute-stream@0.0.7:
     version "0.0.7"
     resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.7.tgz#3075ce93bc21b8fab43e1bc4da7e8115ed1e7bab"
+  
+  mz@^2.6.0:
+    version "2.7.0"
+    resolved "https://registry.yarnpkg.com/mz/-/mz-2.7.0.tgz#95008057a56cafadc2bc63dde7f9ff6955948e32"
+    dependencies:
+      any-promise "^1.0.0"
+      object-assign "^4.0.1"
+      thenify-all "^1.0.0"
   
   nan@^2.3.0, nan@^2.3.2:
     version "2.10.0"
@@ -4941,7 +5001,7 @@ Lockfile:
     version "3.0.0"
     resolved "https://registry.yarnpkg.com/path-exists/-/path-exists-3.0.0.tgz#ce0ebeaa5f78cb18925ea7d810d7b59b010fd515"
   
-  path-is-absolute@^1.0.0, path-is-absolute@^1.0.1:
+  path-is-absolute@1.0.1, path-is-absolute@^1.0.0, path-is-absolute@^1.0.1:
     version "1.0.1"
     resolved "https://registry.yarnpkg.com/path-is-absolute/-/path-is-absolute-1.0.1.tgz#174b9268735534ffbc7ace6bf53a5a9e1b5c5f5f"
   
@@ -5688,7 +5748,7 @@ Lockfile:
     version "1.5.1"
     resolved "https://registry.yarnpkg.com/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
   
-  qs@6.5.1, qs@^6.4.0:
+  qs@6.5.1, qs@^6.4.0, qs@^6.5.1:
     version "6.5.1"
     resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.1.tgz#349cdf6eef89ec45c12d7d5eb3fc0c870343a6d8"
   
@@ -5819,6 +5879,18 @@ Lockfile:
       inherits "~2.0.1"
       isarray "0.0.1"
       string_decoder "~0.10.x"
+  
+  readable-stream@^2.0.5:
+    version "2.3.6"
+    resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.3.6.tgz#b11c27d88b8ff1fbe070643cf94b0c79ae1b0aaf"
+    dependencies:
+      core-util-is "~1.0.0"
+      inherits "~2.0.3"
+      isarray "~1.0.0"
+      process-nextick-args "~2.0.0"
+      safe-buffer "~5.1.1"
+      string_decoder "~1.1.1"
+      util-deprecate "~1.0.1"
   
   readdirp@^2.0.0:
     version "2.1.0"
@@ -6058,6 +6130,13 @@ Lockfile:
   resolve-from@^2.0.0:
     version "2.0.0"
     resolved "https://registry.yarnpkg.com/resolve-from/-/resolve-from-2.0.0.tgz#9480ab20e94ffa1d9e80a804c7ea147611966b57"
+  
+  resolve-path@^1.4.0:
+    version "1.4.0"
+    resolved "https://registry.yarnpkg.com/resolve-path/-/resolve-path-1.4.0.tgz#c4bda9f5efb2fce65247873ab36bb4d834fe16f7"
+    dependencies:
+      http-errors "~1.6.2"
+      path-is-absolute "1.0.1"
   
   resolve-url@^0.2.1:
     version "0.2.1"
@@ -6326,6 +6405,10 @@ Lockfile:
       interpret "^1.0.0"
       rechoir "^0.6.2"
   
+  shortid@^2.2.8:
+    version "2.2.8"
+    resolved "https://registry.yarnpkg.com/shortid/-/shortid-2.2.8.tgz#033b117d6a2e975804f6f0969dbe7d3d0b355131"
+  
   signal-exit@^3.0.0, signal-exit@^3.0.2:
     version "3.0.2"
     resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
@@ -6518,6 +6601,10 @@ Lockfile:
     version "1.4.0"
     resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.4.0.tgz#bb73d446da2796106efcc1b601a253d6c46bd087"
   
+  "statuses@>= 1.4.0 < 2":
+    version "1.5.0"
+    resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.5.0.tgz#161c7dac177659fd9811f43771fa99381478628c"
+  
   statuses@~1.3.1:
     version "1.3.1"
     resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.3.1.tgz#faf51b9eb74aaef3b3acf4ad5f61abf24cb7b93e"
@@ -6601,6 +6688,12 @@ Lockfile:
     version "0.10.31"
     resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-0.10.31.tgz#62e203bc41766c6c28c9fc84301dab1c5310fa94"
   
+  string_decoder@~1.1.1:
+    version "1.1.1"
+    resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-1.1.1.tgz#9cf1611ba62685d7030ae9e4ba34149c3af03fc8"
+    dependencies:
+      safe-buffer "~5.1.0"
+  
   stringstream@~0.0.4:
     version "0.0.5"
     resolved "https://registry.yarnpkg.com/stringstream/-/stringstream-0.0.5.tgz#4e484cd4de5a0bbbee18e46307710a8a81621878"
@@ -6647,6 +6740,21 @@ Lockfile:
     dependencies:
       glob "^7.1.2"
       loader-utils "^1.1.0"
+  
+  superagent@^3.8.2:
+    version "3.8.2"
+    resolved "https://registry.yarnpkg.com/superagent/-/superagent-3.8.2.tgz#e4a11b9d047f7d3efeb3bbe536d9ec0021d16403"
+    dependencies:
+      component-emitter "^1.2.0"
+      cookiejar "^2.1.0"
+      debug "^3.1.0"
+      extend "^3.0.0"
+      form-data "^2.3.1"
+      formidable "^1.1.1"
+      methods "^1.1.1"
+      mime "^1.4.1"
+      qs "^6.5.1"
+      readable-stream "^2.0.5"
   
   supports-color@^2.0.0:
     version "2.0.0"
@@ -6731,6 +6839,18 @@ Lockfile:
   text-table@~0.2.0:
     version "0.2.0"
     resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
+  
+  thenify-all@^1.0.0:
+    version "1.6.0"
+    resolved "https://registry.yarnpkg.com/thenify-all/-/thenify-all-1.6.0.tgz#1a1918d402d8fc3f98fbf234db0bcc8cc10e9726"
+    dependencies:
+      thenify ">= 3.1.0 < 4"
+  
+  "thenify@>= 3.1.0 < 4":
+    version "3.3.0"
+    resolved "https://registry.yarnpkg.com/thenify/-/thenify-3.3.0.tgz#e69e38a1babe969b0108207978b9f62b88604839"
+    dependencies:
+      any-promise "^1.0.0"
   
   throttle-debounce@^1.0.1:
     version "1.0.1"
@@ -7517,9 +7637,11 @@ Lockfile:
       window-size "0.1.0"
 
 Trace: 
-  Error: socket hang up
-      at TLSSocket.onConnectEnd (_tls_wrap.js:1073:19)
-      at Object.onceWrapper (events.js:272:13)
-      at TLSSocket.emit (events.js:185:15)
-      at endReadableNT (_stream_readable.js:1101:12)
-      at process._tickCallback (internal/process/next_tick.js:114:19)
+  Error: Couldn't find package "prebuild-install@^2.3.0" required by "iltorb" on the "npm" registry.
+      at new MessageError (/Users/mjj/.yarn/lib/cli.js:186:110)
+      at PackageRequest.<anonymous> (/Users/mjj/.yarn/lib/cli.js:36274:17)
+      at Generator.throw (<anonymous>)
+      at step (/Users/mjj/.yarn/lib/cli.js:98:30)
+      at /Users/mjj/.yarn/lib/cli.js:111:13
+      at <anonymous>
+      at process._tickCallback (internal/process/next_tick.js:118:7)

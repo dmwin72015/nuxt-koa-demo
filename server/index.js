@@ -18,17 +18,15 @@ async function start() {
 
   // 静态资源
   const staticDir = path.join(__dirname, "../static");
-  console.log(staticDir);
   app.use(koaStatic(staticDir));
+
   // 连接数据库-MongoDB
   await connectDB();
-
   app.use(koaBody());
   app.keys = ['i love marourou 2019'];
   // custom route
   app.use(route.routes())
     .use(route.allowedMethods());
-
 
   // Import and Set Nuxt.js options
   let config = require('../nuxt.config.js')

@@ -36,11 +36,11 @@ export const uploadSaveFile = (ctx) => {
   };
   return new Promise((resolve, reject) => {
     if (koaReq.type !== 'multipart/form-data') {
-      reject({
+      reject(new Error({
         code: '10401',
         data: null,
         message: '请求类型不支持'
-      })
+      }))
     } else {
       busboy.on('file', (fieldname, file, filename, encoding, mimetype) => {
         const newName = randomFileNam(filename);

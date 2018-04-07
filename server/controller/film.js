@@ -1,6 +1,8 @@
-import models from '../models';
+import {
+  Film
+} from '../models';
 
-console.log("【mongoose-model】 >>>> film.js >>> line:3", models)
+console.log("【mongoose-model】 >>>> film.js >>> line:3", Film)
 
 module.exports = {
   async getFilm(ctx, next) {

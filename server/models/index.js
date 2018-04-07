@@ -7,25 +7,35 @@ const conf = require('../config/mongodb.conf.js');
 // ES6 Promise
 mongoose.Promise = global.Promise;
 
-exports.connectDB = async function () {
+// const connectDB = () => {
+//   return new Promise(() => {
+
+//   })
+// }
+exports.connectDB = async() => {
   mongoose.connection
-    .once('open', function () {
+    .once('open', () => {
       console.log("连接成功");
     })
-    .on('error', function (err) {
+    .on('error', (err) => {
       console.error(err)
       process.exit(0);
     });
   await mongoose.connect(conf.url, conf.options);
-  const BaseModel = require('./base_model');
-  const Schemas = {
-    Film: require('./Film'),
-    User: require('./User')
-    // Article: require('./Article')
-  }
-
-  Object.keys(Schemas).forEach(ele => {
-    BaseModel(Schemas[ele]);
-    exports[ele] = mongoose.model(ele, Schemas[ele]);
-  });
+  console.info('数据库已经连接成功......')
 }
+
+const BaseModel = require('./base_model');
+const Schemas = {
+  Film: require('./Film'),
+  User: require('./User'),
+  Country: require('./Country'),
+  Country_Comp: require('./Country_complete')
+  // Article: require('./Article')
+}
+
+Object.keys(Schemas).forEach(ele => {
+  // 添加通用pre
+  BaseModel(Schemas[ele]);
+  exports[ele] = mongoose.model(ele, Schemas[ele]);
+});
