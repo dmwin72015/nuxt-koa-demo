@@ -1,10 +1,30 @@
 // import axios from 'axios'
 import axios from 'axios';
-import filmMod from './model/film';
 import {
   createMutations,
   createState
 } from '../tools/util'
+const filmMod = {
+  name_cn: '',
+  name_en: '',
+  release_date: '',
+  country: '',
+  language: '',
+  imdb_score: '',
+  storyline: '',
+  director: '',
+  writers: '',
+  stars: '',
+  runtime: '',
+  resolution: '', // 文件分辨率
+  size: '',
+  size_unit: '',
+  types: '',
+  extension: '',
+  subtitle: '',
+  download_url: ''
+}
+
 
 export const state = () => ({
   ...createState(filmMod),

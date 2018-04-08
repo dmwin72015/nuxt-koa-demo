@@ -6,7 +6,7 @@
     </h1>
     <h3>
       <table>
-        <tr v-for="(val, key) in responseData">
+        <tr v-for="(val, key) in responseData" :key="val">
             <td>
               {{key}}
             </td>

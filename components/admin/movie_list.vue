@@ -5,8 +5,7 @@
 </template>
 <script>
 import { mapState, mapGetters } from "vuex";
-import filmMod from "@/store/model/film";
-import sizeUnit from "@/store/enum/film_sizeUnit";
+import { unit, filmMod } from "@/tools/util";
 
 export default {
 

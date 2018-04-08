@@ -3,8 +3,7 @@
 </template>
 <script>
 import { mapState, mapGetters } from "vuex";
-import filmMod from "@/store/model/film";
-import sizeUnit from "@/store/enum/film_sizeUnit";
+import { unit, filmMod } from "@/tools/util";
 import movieAdd from "@/components/admin/movie_add.vue";
 import movieList from "@/components/admin/movie_list.vue";
 import movieDetail from "@/components/admin/movie_detail.vue";

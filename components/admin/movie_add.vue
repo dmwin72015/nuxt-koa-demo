@@ -101,14 +101,13 @@
 </template>
 <script>
 import { mapState, mapGetters } from "vuex";
-import filmMod from "@/store/model/film";
-import sizeUnit from "@/store/enum/film_sizeUnit";
+import { unit, filmMod } from "@/tools/util";
 
 export default {
   data() {
     return {
       form: filmMod,
-      sizeUnit: sizeUnit,
+      sizeUnit: unit,
       options: [
         {
           value: "选项1",

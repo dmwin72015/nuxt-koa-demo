@@ -26,7 +26,7 @@ const fields = {
   // 语言
   languages: [],
   // 面积
-  area: Number,
+  area: Number
 //
 }
 

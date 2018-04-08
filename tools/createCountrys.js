@@ -156,4 +156,9 @@ function saveCountrys(data) {
   })
 }
 
-req();
+// 湖区国家数据
+
+function getCountriesData() {
+
+}
+// req();

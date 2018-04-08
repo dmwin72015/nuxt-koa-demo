@@ -39,8 +39,12 @@
             </nuxt-link>
           </el-menu-item-group>
           <el-menu-item-group title="美剧">
-            <span slot="title">美剧</span>
-            <el-menu-item index="1-3">选项3</el-menu-item>
+            <nuxt-link to="/country/">
+              <el-menu-item index="1-3">国家地区</el-menu-item>
+            </nuxt-link>
+            <nuxt-link to="/country/add">
+              <el-menu-item index="1-3">添加国家</el-menu-item>
+            </nuxt-link>
           </el-menu-item-group>
           <el-submenu index="1-4">
             <span slot="title">选项4</span>
@@ -67,6 +71,9 @@ export default {
   name: "default_template_movie",
   data() {
     return {};
+  },
+  creatd() {
+    console.log(this.$store)
   },
   computed: {
     ...mapState({
