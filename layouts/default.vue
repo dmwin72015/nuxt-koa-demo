@@ -124,7 +124,7 @@ export default {
 .main-content {
   @include trans();
   margin-left: $nav-max-width;
-  padding-right: 20px;
+  // padding-right: 20px;
   flex: 1;
 }
 .left-panel {

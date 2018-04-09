@@ -1,103 +1,105 @@
 <template>
-  <el-form ref="form" label-width="100px" v-model="form">
-    <h3 class="film-panel-title">电影基本信息</h3>
-    <el-row>
-      <el-col :span="12">
-        <el-form-item label="中文名字" required>
-          <el-input v-model="form.name_cn"></el-input>
-        </el-form-item>
-        <el-form-item label="英文名字" required>
-          <el-input v-model="form.name_en"></el-input>
-        </el-form-item>
-        <el-form-item label="发行时间">
-          <el-date-picker v-model="form.release_date" type="date" placeholder="选择日期"></el-date-picker>
-        </el-form-item>
-      </el-col>
-      <el-col :span="12">
-        <el-form-item label="封面图">
-          <el-upload class="pic-uploader" action="/api/v1/uploadfile" :show-file-list="false" :on-success="uploadSuccess" :on-error="uploadError" :before-upload="beforeAvatarUpload" :multiple="false">
-            <img v-if="imageUrl" :src="imageUrl" class="avatar">
-            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-          </el-upload>
-        </el-form-item>
-      </el-col>
-    </el-row>
-    <el-row>
-      <el-col :span="12">
-        <el-form-item label="语言">
-          <el-select v-model="form.language" filterable placeholder="请选择">
-            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-            </el-option>
-          </el-select>
-        </el-form-item>
-      </el-col>
-      <el-col :span="12">
-        <el-form-item label="发行国家">
-          <el-select v-model="form.language" filterable placeholder="请选择">
-            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-            </el-option>
-          </el-select>
-        </el-form-item>
-      </el-col>
-    </el-row>
-    <el-row>
-      <el-col :span="12">
-        <el-form-item label="IMDB评分">
-          <el-input v-model="form.imdb_score"></el-input>
-        </el-form-item>
-      </el-col>
-      <el-col :span="12">
-        <el-form-item label="主演">
-          <el-input v-model="form.stars"></el-input>
-        </el-form-item>
-      </el-col>
-    </el-row>
-    <el-row>
-      <el-col :span="12">
-        <el-form-item label="导演">
-          <el-input v-model="form.director"></el-input>
-        </el-form-item>
-      </el-col>
-      <el-col :span="12">
-        <el-form-item label="编剧">
-          <el-input v-model="form.writers"></el-input>
-        </el-form-item>
-      </el-col>
-    </el-row>
-    <el-form-item label="剧情简介">
-      <el-input type="textarea" v-model="form.storyline"></el-input>
-    </el-form-item>
-    <h3 class="film-panel-title">文件信息</h3>
-    <el-row>
-      <el-col :span="8">
-        <el-form-item label="时长">
-          <el-input v-model="form.runtime"></el-input>
-        </el-form-item>
-        <el-form-item label="文件大小">
-          <el-input v-model="form.size"></el-input>
-        </el-form-item>
-      </el-col>
-      <el-col :span="8">
-        <el-form-item label="文件分辨率">
-          <el-input v-model="form.resolution"></el-input>
-        </el-form-item>
-        <el-form-item label="文件后缀">
-          <el-input v-model="form.extension"></el-input>
-        </el-form-item>
-      </el-col>
-      <el-col :span="8">
-        <el-form-item label="类型">
-          <el-input v-model="form.types"></el-input>
-        </el-form-item>
-        <el-form-item label="字幕">
-          <el-input v-model="form.subtitle"></el-input>
-        </el-form-item>
-      </el-col>
-    </el-row>
-    <el-form-item label="下载链接">
-      <el-input v-model="form.download_url"></el-input>
-    </el-form-item>
-  </el-form>
+  <div class="form-wraper">
+    <el-form ref="form" label-width="100px" v-model="form">
+      <h3 class="film-panel-title">电影基本信息</h3>
+      <el-row>
+        <el-col :span="12">
+          <el-form-item label="中文名字" required>
+            <el-input v-model="form.name_cn"></el-input>
+          </el-form-item>
+          <el-form-item label="英文名字" required>
+            <el-input v-model="form.name_en"></el-input>
+          </el-form-item>
+          <el-form-item label="发行时间">
+            <el-date-picker v-model="form.release_date" type="date" placeholder="选择日期"></el-date-picker>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="封面图">
+            <el-upload class="pic-uploader" action="/api/v1/uploadfile" :show-file-list="false" :on-success="uploadSuccess" :on-error="uploadError" :before-upload="beforeAvatarUpload" :multiple="false">
+              <img v-if="imageUrl" :src="imageUrl" class="avatar">
+              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+            </el-upload>
+          </el-form-item>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="12">
+          <el-form-item label="语言">
+            <el-select v-model="form.language" filterable placeholder="请选择">
+              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="发行国家">
+            <el-select v-model="form.language" filterable placeholder="请选择">
+              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="12">
+          <el-form-item label="IMDB评分">
+            <el-input v-model="form.imdb_score"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="主演">
+            <el-input v-model="form.stars"></el-input>
+          </el-form-item>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="12">
+          <el-form-item label="导演">
+            <el-input v-model="form.director"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="编剧">
+            <el-input v-model="form.writers"></el-input>
+          </el-form-item>
+        </el-col>
+      </el-row>
+      <el-form-item label="剧情简介">
+        <el-input type="textarea" v-model="form.storyline"></el-input>
+      </el-form-item>
+      <h3 class="film-panel-title">文件信息</h3>
+      <el-row>
+        <el-col :span="8">
+          <el-form-item label="时长">
+            <el-input v-model="form.runtime"></el-input>
+          </el-form-item>
+          <el-form-item label="文件大小">
+            <el-input v-model="form.size"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="文件分辨率">
+            <el-input v-model="form.resolution"></el-input>
+          </el-form-item>
+          <el-form-item label="文件后缀">
+            <el-input v-model="form.extension"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="类型">
+            <el-input v-model="form.types"></el-input>
+          </el-form-item>
+          <el-form-item label="字幕">
+            <el-input v-model="form.subtitle"></el-input>
+          </el-form-item>
+        </el-col>
+      </el-row>
+      <el-form-item label="下载链接">
+        <el-input v-model="form.download_url"></el-input>
+      </el-form-item>
+    </el-form>
+  </div>
 </template>
 <script>
 import { mapState, mapGetters } from "vuex";
@@ -170,6 +172,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.form-wraper {
+  padding: 0 15px;
+}
 .film-panel-title {
   padding-left: 20px;
   line-height: 35px;

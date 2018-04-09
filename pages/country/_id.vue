@@ -1,25 +1,27 @@
 <template>
-  <div>
-    <h3>国家列表</h3>
-    <ul  class="country-list">
-      <li v-for="(item , index) in list" :key="item.code"  class="country-item">
-        <span>{{index}}</span>
-        <span>{{item.country_code}}</span>
-        <span>{{item.id}}</span>
-        <span>{{item.native_name}}</span>
-      </li>
-    </ul>
-  </div>
+  <component :is="currentView" :data="list"></component>
+  
 </template>
 
 <script>
 import { mapState } from "vuex";
+import list from '../../components/admin/country_list.vue';
+import add from '../../components/admin/country_add.vue';
 
 export default {
+  data() {
+    return {
+      currentView: 'list'
+    }
+  },
   computed: {
     ...mapState({
       list: state => state.country.list
     })
+  },
+  components: {
+    list,
+    add
   },
   validate({ params }) {
     console.log("validate >>>>> " + Date.now(), params);
