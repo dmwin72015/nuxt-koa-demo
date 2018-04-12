@@ -1,24 +1,21 @@
-import {
-  Country,
-  Country_Comp
-} from '../models';
+import { Country, CountryComp } from "../models";
 
 module.exports = {
   async saveCountry(ctx, next) {
-    let art = await Country.find({})
+    let art = await Country.find({});
     ctx.body = {
       code: 200,
       data: art,
-      message: 'success'
-    }
+      message: "success"
+    };
   },
 
   async getCountry(ctx, next) {
-    const result = await Country_Comp.find();
+    const result = await CountryComp.find();
     ctx.body = {
       code: 200,
       data: result,
-      message: 'success'
-    }
+      message: "success"
+    };
   }
-}
+};

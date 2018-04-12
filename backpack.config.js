@@ -1,39 +1,40 @@
-const path = require('path');
-const fs = require('fs');
+const path = require("path");
+const fs = require("fs");
 const nodeModules = {};
-const merge = require('webpack-merge');
+const merge = require("webpack-merge");
 
 let moduleLeng = 0;
 
-fs.readdirSync('node_modules')
-  .filter((x) => {
-    return ['.bin'].indexOf(x) === -1;
+fs
+  .readdirSync("node_modules")
+  .filter(x => {
+    return [".bin"].indexOf(x) === -1;
   })
-  .forEach((mod) => {
-    nodeModules[mod] = 'commonjs ' + mod;
+  .forEach(mod => {
+    nodeModules[mod] = "commonjs " + mod;
     moduleLeng++;
   });
 
 // alias  add "@" prex
 let fnDirs = {
-  controller: './controller',
-  models: './models',
-  config: './config',
-  routes: './routes'
-}
+  controller: "./controller",
+  models: "./models",
+  config: "./config",
+  routes: "./routes"
+};
 module.exports = {
   webpack: (config, options, webpack) => {
     let alias = {};
 
-    Object.keys(fnDirs).forEach((ele) => {
-      alias['@' + ele] = path.resolve(__dirname, 'server', fnDirs[ele]);
+    Object.keys(fnDirs).forEach(ele => {
+      alias["@" + ele] = path.resolve(__dirname, "server", fnDirs[ele]);
     });
 
-    alias['@'] = path.resolve(__dirname, 'server');
+    alias["@"] = path.resolve(__dirname, "server");
 
     config = merge(config, {
       entry: {
-        main: './server/index.js'
+        main: "./server/index.js"
       },
       /* 必须使用main */
       // output: {
@@ -55,11 +56,10 @@ module.exports = {
       },
       // 过滤掉node_modules中的模块，不进行打包
       externals: nodeModules,
-      recordsPath: path.join(__dirname, 'build/records.json'),
+      recordsPath: path.join(__dirname, "build/records.json"),
 
       plugins: [
         // new webpack.ContextReplacementPlugin(/server/, '.', true)
-
         // new webpack.ContextReplacementPlugin(/server\/(controller|models|config|routes)/, (context) => {
         //   Object.assign(context, {
         //     async: true,
@@ -67,7 +67,7 @@ module.exports = {
         //   });
         // })
       ]
-    })
+    });
 
     // console.log("[INFO:total number of modules] -- ", config);
     /*
@@ -79,6 +79,6 @@ module.exports = {
     console.log(options)
     console.log("---------------------------")
     */
-    return config
+    return config;
   }
-}
+};

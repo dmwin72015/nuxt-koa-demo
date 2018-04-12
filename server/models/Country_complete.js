@@ -1,9 +1,7 @@
 /**
  * Created by mjj on 2018/4/7.
  */
-const {
-  Schema
-} = require('mongoose');
+const { Schema } = require("mongoose");
 
 const fields = {
   id: {
@@ -22,7 +20,7 @@ const fields = {
     type: String
   },
   info: Schema.Types.Mixed
-}
+};
 
 const CountrycompSchema = new Schema(fields);
 

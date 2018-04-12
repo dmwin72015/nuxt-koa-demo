@@ -1,5 +1,4 @@
-import axios from 'axios'
-// state
+import axios from "axios";
 export const state = () => ({
   page: 1,
   list: []
@@ -11,29 +10,41 @@ export const mutations = {
     state.isCollapse = value;
   },
   SET_COUNTRIES_DATA(state, list) {
-    state.list = list
+    state.list = list;
   }
-}
+};
 
 // actions
 export const actions = {
-  GET_COUNTRIES({
-    state,
-    commit
-  }, options) {
-    console.log("执行store action ：：：： GET_COUNTRIES", Date.now())
-    axios.get('/api/v1/country')
-      .then(resp => {
-        console.log("国家列表", resp)
-        if (resp && resp.status === 200) {
-          commit('SET_COUNTRIES_DATA', resp.data.data)
-        }
-      }).catch(err => {
-        console.log("服务器错误", err)
-        throw err;
-      });
+  nuxtServerInit({ commit }, { req }) {
+    console.log("来自服务端渲染", req);
+  },
+  GET_COUNTRIES({ state, commit }, options) {
+    let { ctx: { isServer, isClient } } = options;
+    if (isClient) {
+      axios
+        .get("/api/v1/country")
+        .then(resp => {
+          console.log("国家列表", resp);
+          if (resp && resp.status === 200) {
+            commit("SET_COUNTRIES_DATA", resp.data.data);
+          }
+        })
+        .catch(err => {
+          const { response, request } = err;
+          console.log(Object.keys(err));
+          console.log(
+            "服务器错误.....>>>>>",
+            response.status,
+            response.statusText
+          );
+          throw err;
+        });
+    } else if (isServer) {
+      // 执行server逻辑处理
+    }
   }
 };
 
 // getters
-export const getters = {}
+export const getters = {};
