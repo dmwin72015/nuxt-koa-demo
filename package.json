@@ -35,7 +35,7 @@
     "moment": "^2.22.0",
     "mongoose": "^5.0.10",
     "node-sass": "^4.7.2",
-    "nuxt": "latest",
+    "nuxt": "^1.4.0",
     "require-directory": "^2.1.1",
     "sass-loader": "^6.0.7",
     "shortid": "^2.2.8",

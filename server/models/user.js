@@ -1,4 +1,4 @@
-const { Schema } = require('mongoose');
+const { Schema } = require("mongoose");
 
 const fields = {
   name: { type: String },
@@ -37,9 +37,12 @@ const fields = {
   retrieve_time: { type: Number },
   retrieve_key: { type: String },
 
-  accessToken: { type: String }
-}
-
+  accessToken: { type: String },
+  modify_at: {
+    type: Date,
+    default: Date.now
+  }
+};
 
 const UserSchema = new Schema(fields);
 

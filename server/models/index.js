@@ -36,6 +36,6 @@ const Schemas = {
 
 Object.keys(Schemas).forEach(ele => {
   // 添加通用pre
-  BaseModel(Schemas[ele]);
+  // BaseModel(Schemas[ele]);
   exports[ele] = mongoose.model(ele, Schemas[ele]);
 });

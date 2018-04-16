@@ -1,17 +1,13 @@
-import {
-  Film
-} from '../models';
-
-console.log("【mongoose-model】 >>>> film.js >>> line:3", Film)
+import { Film } from "../models";
 
 module.exports = {
   async getFilm(ctx, next) {
-    let art = await Film.find({})
+    let art = await Film.find({});
     ctx.body = {
       code: 200,
       data: art,
-      message: 'success'
-    }
+      message: "success"
+    };
   },
   async saveFilm(ctx, next) {
     let film = new Film();
@@ -21,9 +17,9 @@ module.exports = {
     ctx.body = {
       code: 200,
       data: film,
-      message: 'success',
+      message: "success",
       ip: ctx.ip
-    }
+    };
   },
 
   async delFilm(ctx, next) {
@@ -31,9 +27,9 @@ module.exports = {
       code: 200,
       data: {
         url: ctx.url,
-        type: 'delete'
+        type: "delete"
       },
-      message: 'success'
-    }
+      message: "success"
+    };
   }
-}
+};

@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h3>国家信息</h3>
-    <el-table :data="data" stripe style="width: 100%;margin-right:-15px;">
+    <el-table :data="list" stripe style="width: 100%;margin-right:-15px;">
       <el-table-column type="selection" width="50">
       </el-table-column>
       <el-table-column prop="id" label="ID" width="180">
@@ -26,7 +26,6 @@
       </el-table-column>
     </el-table>
   </div>
-
 </template>
 <script>
 export default {
@@ -35,8 +34,13 @@ export default {
   },
   props: {
     data: {
-      type: Array,
-      default: []
+      type: Object,
+      default: {}
+    }
+  },
+  computed: {
+    list() {
+      return this.data.list;
     }
   },
   methods: {

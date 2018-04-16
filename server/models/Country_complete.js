@@ -19,7 +19,11 @@ const fields = {
   country_code: {
     type: String
   },
-  info: Schema.Types.Mixed
+  info: Schema.Types.Mixed,
+  modify_at: {
+    type: Date,
+    default: Date.now
+  }
 };
 
 const CountrycompSchema = new Schema(fields);
