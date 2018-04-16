@@ -1,6 +1,5 @@
 <template>
   <component :is="currentView" :data="list"></component>
-
 </template>
 
 <script>
@@ -27,15 +26,10 @@ export default {
     // console.log("validate >>>>> " + Date.now(), params);
     return /^[\w\d]+$/.test(params.action);
   },
-  fetch(ctx) {
-    // console.log("fetch" + Date.now(), params);
-    // console.log(ctx)
-    const { store, params } = ctx;
-    store.dispatch("country/GET_COUNTRIES", { ctx });
+  async fetch({ store }) {
+    await store.dispatch("country/GET_COUNTRIES");
   },
-  asyncData({ params, env, error }) {
-    let data = {};
-    console.log("_id.vue >>>> asyncData" + Date.now(), params.id);
+  async asyncData({ params, env, error, app }) {
     return {
       currentView: params.id || "list"
     };

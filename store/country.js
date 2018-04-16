@@ -1,4 +1,6 @@
+import request from "../tools/axios_utils";
 import axios from "axios";
+
 export const state = () => ({
   page: 1,
   list: []
@@ -6,9 +8,6 @@ export const state = () => ({
 
 // mutations
 export const mutations = {
-  SET_COLLAPSE(state, value) {
-    state.isCollapse = value;
-  },
   SET_COUNTRIES_DATA(state, list) {
     state.list = list;
   }
@@ -16,6 +15,7 @@ export const mutations = {
 
 // actions
 export const actions = {
+<<<<<<< HEAD
   nuxtServerInit({
     commit
   }, {
@@ -45,6 +45,22 @@ export const actions = {
         console.log(err)
         // throw err;
       });
+=======
+  async GET_COUNTRIES({ state, commit }) {
+    const data = await request
+      .get("/v1/country")
+      .then(resp => {
+        if (resp && resp.status === 200) {
+          return resp.data.data;
+        }
+      })
+      .catch(err => {
+        const { response, request } = err;
+        console.error(response);
+        throw err;
+      });
+    commit("SET_COUNTRIES_DATA", data);
+>>>>>>> a07f84ce7b6666b520b1f7444d2a81dd57811a4e
   }
 };
 

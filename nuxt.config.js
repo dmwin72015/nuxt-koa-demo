@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 module.exports = {
   /*
    ** Headers of the page
@@ -142,3 +143,6 @@ module.exports = {
     }
   }
 };
+=======
+module.exports = require("./nuxt_config");
+>>>>>>> a07f84ce7b6666b520b1f7444d2a81dd57811a4e

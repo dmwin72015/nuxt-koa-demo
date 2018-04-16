@@ -31,6 +31,7 @@ module.exports = {
     });
 
     alias["@"] = path.resolve(__dirname, "server");
+    alias["@@"] = path.resolve(__dirname);
 
     config = merge(config, {
       entry: {
@@ -41,7 +42,6 @@ module.exports = {
       //   filename: '[name].server.js'
       // },
       node: {
-        node: false,
         __filename: false,
         __dirname: false,
         console: false,

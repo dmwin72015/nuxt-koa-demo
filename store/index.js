@@ -1,42 +1,38 @@
-import axios from 'axios'
+import axios from "axios";
 
 export const state = () => ({
-  visits: [],
   headers: {},
-  responseData: {}
-})
+  responseData: {},
+  session: null
+});
 
 export const mutations = {
-  ADD_VISIT(state, path) {
-    state.visits.push({
-      path,
-      date: new Date().toJSON()
-    })
+  SET_COLLAPSE(state, value) {
+    state.isCollapse = value;
   },
-
-  ADD_HEADERS(state, headers = {}) {
-    state.headers = headers;
-  },
-
-  SHOW_RESPONSE(state, data = {}) {
-    state.responseData = data;
+  SET_SESSION(state, data) {
+    state.session = data;
   }
 };
 
 export const actions = {
-
+  // 只有在store 的 index.js 才调用
+  nuxtServerInit({ commit }, { req }) {
+    console.log("来自服务端渲染 >>>>> nuxtServerInit >>>>>>>>>");
+  },
+  // tets api
   GET_APi({ commit, state, dispatch }) {
-    axios.get('/v1/api')
+    axios
+      .get("/v1/api")
       .then(resp => {
-        commit('SHOW_RESPONSE', resp.data);
+        commit("SHOW_RESPONSE", resp.data);
       })
-      .catch((err) => {
-        commit('SHOW_RESPONSE', { msg: '错误' });
+      .catch(err => {
+        commit("SHOW_RESPONSE", { msg: "错误" });
         console.error(err);
-      })
+      });
   }
-
   // async nuxtServerInit({ dispatch }) {
   //   await dispatch('GET_APi')
   // }
-}
+};

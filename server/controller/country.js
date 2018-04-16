@@ -11,10 +11,18 @@ module.exports = {
   },
 
   async getCountry(ctx, next) {
+    const { request, response } = ctx;
+    const query = request.query;
+    const page = query.page || 1;
+
+    const total = await CountryComp.count().exec();
     const result = await CountryComp.find();
     ctx.body = {
       code: 200,
-      data: result,
+      data: {
+        total: total,
+        list: result
+      },
       message: "success"
     };
   }
