@@ -15,7 +15,6 @@ export const mutations = {
 
 // actions
 export const actions = {
-<<<<<<< HEAD
   nuxtServerInit({
     commit
   }, {
@@ -23,29 +22,6 @@ export const actions = {
   }) {
     console.log("来自服务端渲染", req);
   },
-  GET_COUNTRIES({
-    state,
-    commit
-  }, options) {
-    let {
-      ctx: {
-        isServer,
-        isClient
-      }
-    } = options;
-    axios
-      .get("http://127.0.0.1:9800/api/v1/country")
-      .then(resp => {
-        console.log("国家列表", resp);
-        if (resp && resp.status === 200) {
-          commit("SET_COUNTRIES_DATA", resp.data.data);
-        }
-      })
-      .catch(err => {
-        console.log(err)
-        // throw err;
-      });
-=======
   async GET_COUNTRIES({ state, commit }) {
     const data = await request
       .get("/v1/country")
@@ -60,7 +36,6 @@ export const actions = {
         throw err;
       });
     commit("SET_COUNTRIES_DATA", data);
->>>>>>> a07f84ce7b6666b520b1f7444d2a81dd57811a4e
   }
 };
 
