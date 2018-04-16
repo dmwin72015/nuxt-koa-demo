@@ -78,20 +78,20 @@ module.exports = {
     analyze: true,
     extend(config, ctx) {
       if (ctx.isClient) {
-        console.log(
-          "【",
-          new Date().toLocaleTimeString(),
-          "】",
-          "客户端打包... BEGIN >>>>>>>>>>>>>>>>>>"
-        );
-        console.log("build >>>>> ", ctx);
-        console.log("build >>>>> ", config);
-        console.log(
-          "【",
-          new Date().toLocaleTimeString(),
-          "】",
-          "客户端打包... END >>>>>>>>>>>>>>>>>>"
-        );
+        // console.log(
+        //   "【",
+        //   new Date().toLocaleTimeString(),
+        //   "】",
+        //   "客户端打包... BEGIN >>>>>>>>>>>>>>>>>>"
+        // );
+        // console.log("build >>>>> ", ctx);
+        // console.log("build >>>>> ", config);
+        // console.log(
+        //   "【",
+        //   new Date().toLocaleTimeString(),
+        //   "】",
+        //   "客户端打包... END >>>>>>>>>>>>>>>>>>"
+        // );
         config.module.rules.push({
           enforce: "pre",
           test: /\.(js|vue)$/,
@@ -107,28 +107,28 @@ module.exports = {
           __filename: "mock",
           __dirname: "mock",
           Buffer: false,
-          setImmediate: true,
-          dns: true,
-          tls: true,
-          fs: true
+          setImmediate: true
+          // dns: true,
+          // tls: true,
+          // fs: true
         };
       }
       if (ctx.isServer) {
         // config.externals = nodeModules;
-        console.log(
-          "【",
-          new Date().toLocaleTimeString(),
-          "】",
-          "服务端打包.. BEGIN >>>>>>>>>>>>"
-        );
-        console.log("build >>>>> ", ctx);
-        console.log("build >>>>> ", config);
-        console.log(
-          "【",
-          new Date().toLocaleTimeString(),
-          "】",
-          "服务端打包... END >>>>>>>>>>>>"
-        );
+        // console.log(
+        //   "【",
+        //   new Date().toLocaleTimeString(),
+        //   "】",
+        //   "服务端打包.. BEGIN >>>>>>>>>>>>"
+        // );
+        // console.log("build >>>>> ", ctx);
+        // console.log("build >>>>> ", config);
+        // console.log(
+        //   "【",
+        //   new Date().toLocaleTimeString(),
+        //   "】",
+        //   "服务端打包... END >>>>>>>>>>>>"
+        // );
         // config.resolve = {}
       }
     }

@@ -72,6 +72,7 @@ async function start() {
 
   app.on('error', () => {
     console.error('【' + Date.now() + '】服务器出错了')
+    // throw error;
   })
   console.log('Server listening on ' + host + ':' + port) // eslint-disable-line no-console
 }
