@@ -14,6 +14,7 @@ module.exports = {
     const { request, response } = ctx;
     const query = request.query;
     const page = query.page || 1;
+    const limit = Math.min(50, query.pagesize || 20);
 
     const total = await CountryComp.count().exec();
     const result = await CountryComp.find();
