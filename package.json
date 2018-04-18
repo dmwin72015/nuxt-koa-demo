@@ -41,6 +41,7 @@
     "shortid": "^2.2.8",
     "source-map-support": "^0.4.15",
     "superagent": "^3.8.2",
+    "validator": "^9.4.1",
     "vue-style-loader": "^4.0.2"
   },
   "devDependencies": {

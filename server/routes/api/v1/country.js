@@ -1,15 +1,16 @@
-import {
-  getCountry
-} from '@controller/country';
+import { getCountry } from "@controller/country";
 
-module.exports = [{
-  url: "/:id",
-  method: {
-    get: getCountry
+module.exports = [
+  {
+    url: "/:id",
+    method: {
+      get: getCountry
+    }
+  },
+  {
+    url: "/",
+    method: {
+      get: [getCountry]
+    }
   }
-}, {
-  url: '/',
-  method: {
-    get: getCountry
-  }
-}]
+];

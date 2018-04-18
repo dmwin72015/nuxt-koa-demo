@@ -1,5 +1,5 @@
 import { Country, CountryComp } from "../models";
-
+import isInt from "validator/lib/isEmail";
 module.exports = {
   async saveCountry(ctx, next) {
     let art = await Country.find({});
@@ -13,8 +13,10 @@ module.exports = {
   async getCountry(ctx, next) {
     const { request, response } = ctx;
     const query = request.query;
-    const page = query.page || 1;
-    const limit = Math.min(50, query.pagesize || 20);
+    const page = isInt(query.page || "1", { min: 1 });
+    const limit = isInt(query.limit || "10", { min: 10, max: 50 });
+    console.log(query);
+    // console.log(page, limit);
 
     const total = await CountryComp.count().exec();
     const result = await CountryComp.find();
