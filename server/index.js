@@ -5,12 +5,14 @@ import route from "./routes/";
 import { connectDB } from "./models";
 import koaBody from "koa-body";
 import koaStatic from "koa-static";
+import koaValidate from "koa-validate";
 
 async function start() {
   const app = new Koa();
   const host = process.env.HOST || "127.0.0.1";
   const port = process.env.PORT || 9800;
-
+  // validate middleware
+  koaValidate(app);
   // 静态资源
   const staticDir = path.join(__dirname, "../static");
   app.use(koaStatic(staticDir));

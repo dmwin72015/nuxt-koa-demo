@@ -1,5 +1,5 @@
 import { getCountry } from "@controller/country";
-
+import valid from "@validator/valid_getCountry.js";
 module.exports = [
   {
     url: "/:id",
@@ -10,7 +10,7 @@ module.exports = [
   {
     url: "/",
     method: {
-      get: [getCountry]
+      get: [valid, getCountry]
     }
   }
 ];

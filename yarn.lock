@@ -3793,6 +3793,16 @@ json-loader@^0.5.4:
   version "0.5.7"
   resolved "https://registry.yarnpkg.com/json-loader/-/json-loader-0.5.7.tgz#dca14a70235ff82f0ac9a3abeb60d337a365185d"
 
+json-path@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/json-path/-/json-path-0.1.3.tgz#dce61357b3b281b28ac647ec0a709bc58a155bf8"
+  dependencies:
+    json-ptr "~0.1.1"
+
+json-ptr@~0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/json-ptr/-/json-ptr-0.1.1.tgz#bab82a31e292ce7af9e3fc7fd65acd1bbb9248e8"
+
 json-schema-traverse@^0.3.0:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/json-schema-traverse/-/json-schema-traverse-0.3.1.tgz#349a6d44c53a51de89b40805c5d5e59b417d3340"
@@ -3920,6 +3930,13 @@ koa-static@^4.0.2:
   dependencies:
     debug "^2.6.8"
     koa-send "^4.1.0"
+
+koa-validate@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/koa-validate/-/koa-validate-1.0.7.tgz#0b7dd3feee83cae1b4694fa06376477d945eb430"
+  dependencies:
+    json-path "^0.1.3"
+    validator "^5.2.0"
 
 koa@^2.4.1:
   version "2.5.0"
@@ -7157,6 +7174,10 @@ validate-npm-package-license@^3.0.1:
   dependencies:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
+
+validator@^5.2.0:
+  version "5.7.0"
+  resolved "https://registry.yarnpkg.com/validator/-/validator-5.7.0.tgz#7a87a58146b695ac486071141c0c49d67da05e5c"
 
 validator@^9.4.1:
   version "9.4.1"

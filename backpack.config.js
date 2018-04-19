@@ -20,7 +20,8 @@ let fnDirs = {
   controller: "./controller",
   models: "./models",
   config: "./config",
-  routes: "./routes"
+  routes: "./routes",
+  validator: "./validator"
 };
 module.exports = {
   webpack: (config, options, webpack) => {
