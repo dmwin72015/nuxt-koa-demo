@@ -2,6 +2,8 @@ const path = require("path");
 const fs = require("fs");
 const nodeModules = {};
 const merge = require("webpack-merge");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const plugin = new ExtractTextPlugin("style.css");
 
 let moduleLeng = 0;
 
@@ -23,6 +25,61 @@ let fnDirs = {
   routes: "./routes",
   validator: "./validator"
 };
+const rules = [
+  {
+    test: /\.(scss|sass)$/,
+    use: [
+      "style-loader",
+      "css-loader",
+      "postcss-loader",
+      "sass-loader",
+      {
+        loader: "sass-resources-loader",
+        options: {
+          resources: globaCss()
+        }
+      }
+    ]
+  },
+  {
+    test: /\.vue$/,
+    loader: "vue-loader",
+    options: {
+      extractCSS: plugin,
+      loaders: {
+        scss: [
+          "vue-style-loader",
+          "css-loader",
+          "sass-loader",
+          {
+            loader: "sass-resources-loader",
+            options: {
+              resources: globaCss()
+            }
+          }
+        ],
+        sass: [
+          "vue-style-loader",
+          "css-loader",
+          "sass-loader?indentedSyntax",
+          {
+            loader: "sass-resources-loader",
+            options: {
+              resources: globaCss()
+            }
+          }
+        ]
+      }
+    }
+  }
+];
+function globaCss() {
+  return [
+    path.resolve(__dirname, "../assets/sass/variables.scss"),
+    path.resolve(__dirname, "../assets/sass/mixins.scss"),
+    path.resolve(__dirname, "../assets/sass/font-vars.scss")
+  ];
+}
 module.exports = {
   webpack: (config, options, webpack) => {
     let alias = {};
@@ -67,7 +124,10 @@ module.exports = {
         //     regExp: /\.js$/
         //   });
         // })
-      ]
+      ],
+      module: {
+        rules: [].concat(rules)
+      }
     });
 
     // console.log("[INFO:total number of modules] -- ", config);
@@ -80,6 +140,7 @@ module.exports = {
     console.log(options)
     console.log("---------------------------")
     */
+    console.log(config);
     return config;
   }
 };
