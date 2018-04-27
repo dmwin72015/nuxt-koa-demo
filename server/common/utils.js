@@ -88,7 +88,7 @@ export const valid_number = (v_val, { dft = -1, max, min }) => {
   let min_v = parseInt(min);
 
   if (isNaN(val)) {
-    return d_val;
+    return dft;
   }
   return v_val;
 };
