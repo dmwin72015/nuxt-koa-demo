@@ -81,14 +81,24 @@ export const uploadSaveFile = ctx => {
  * @param  {number}   max    - 最大值
  * @param  {number}   min    - 最小值 }
  */
-export const valid_number = (v_val, { dft = -1, max, min }) => {
+export const valid_number = (v_val, { defaultVal, max, min }) => {
   let val = parseInt(v_val, 10);
-  let def_v = parseInt(dft);
+  let def_v = parseInt(defaultVal);
   let max_v = parseInt(max);
   let min_v = parseInt(min);
 
   if (isNaN(val)) {
+<<<<<<< HEAD
     return dft;
+=======
+    return defaultVal;
+  }
+  if (!isNaN(max_v)) {
+    return Math.max(val, max);
+  }
+  if (!isNaN(min_v)) {
+    return Math.min(val, max);
+>>>>>>> faefff528d7258a2e84cd020e2ea1c4b2bc6e223
   }
   return v_val;
 };
