@@ -140,7 +140,7 @@ module.exports = {
     console.log(options)
     console.log("---------------------------")
     */
-    console.log(config);
+    // console.log(config);
     return config;
   }
 };

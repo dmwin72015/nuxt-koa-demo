@@ -30,7 +30,8 @@ const Schemas = {
   Film: require("./Film"),
   User: require("./User"),
   Country: require("./Country"),
-  CountryComp: require("./Country_complete")
+  CountryComp: require("./Country_complete"),
+  Media: require('./Media')
   // Article: require('./Article')
 };
 

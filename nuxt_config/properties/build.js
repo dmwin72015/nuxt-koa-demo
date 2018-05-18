@@ -79,7 +79,7 @@ module.exports = {
   analyze: true,
   vendor: ["axios"],
   extend(config, { isDev, isClient, isServer }) {
-    console.dir(config.module.rules);
+    // console.dir(config.module.rules);
     let base_rules = [
       {
         enforce: "pre",
@@ -123,6 +123,6 @@ module.exports = {
     });
     console.log("最终配置文件 >>>>>>>>");
     // TODO:https://xiaogliu.github.io/2017/09/09/use-sass-global-variables-in-every-vue-components/
-    console.dir(config.module.rules);
+    // console.dir(config.module.rules);
   }
 };

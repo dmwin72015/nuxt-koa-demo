@@ -18,7 +18,7 @@
           <el-button type="info" icon="el-icon-setting" circle class="user-message"></el-button>
         </el-badge>
       </div>
-      <div class="toggle-miniMenu" @click="toggleShow">
+      <div class="toggle-miniMenu">
         <i class="el-icon-back"></i>
       </div>
     </div>
@@ -61,6 +61,7 @@
   </div>
 </template>
 <style lang="scss" scoped>
+@import "~assets/sass/app.scss";
 .side {
   position: fixed;
   top: 0;

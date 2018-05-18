@@ -13,6 +13,9 @@ export default {
   data() {
     return {};
   },
+  components:{
+    pageSide
+  },
   creatd() {
     console.log(this.$store);
   },
